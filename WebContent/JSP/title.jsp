@@ -28,10 +28,10 @@
           <h1>NewsCrawler</h1>
           <h2>뉴스크롤러 :뉴스를 보는 새로운 관점</h2>
           <p>
-            <a href="https://github.com/hyunjun529">기사 제목 모아보기</a>
-            <a href="https://www.facebook.com/zaq1qaz">키워드 검색</a>
-            <a href="https://twitter.com/zaq1qaz">뉴스고로케</a>
-            <a href="https://www.youtube.com/channel/UCPwsgRyz60XPg8yGJ5HalVA">GitHub</a>
+            <a href="">기사 제목 모아보기</a>
+            <a href="">키워드 검색</a>
+            <a href="">뉴스고로케</a>
+            <a href="">GitHub</a>
           </p>
         </div>
       </div>
