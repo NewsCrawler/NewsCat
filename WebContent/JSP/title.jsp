@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <title>박현준 :: hyunjun529</title>
+  <title>뉴스크롤러</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -28,9 +28,6 @@
           <h1>NewsCrawler</h1>
           <h2>뉴스크롤러 :뉴스를 보는 새로운 관점</h2>
           <p>
-            <a href="">기사 제목 모아보기</a>
-            <a href="">키워드 검색</a>
-            <a href="">뉴스고로케</a>
             <a href="">GitHub</a>
           </p>
         </div>
@@ -39,7 +36,7 @@
 
     <div class="row">
       <div id="background" class="col-xs-12">
-        <h4>Done</h4>
+        <h4>기사</h4>
         <ul class="list-group">
           <li class="list-group-item">
           	<strong>기사제목</strong>
