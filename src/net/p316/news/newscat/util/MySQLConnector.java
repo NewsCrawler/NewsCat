@@ -32,7 +32,7 @@ public class MySQLConnector {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
-                System.out.println(rs.getString("title") + " | " + rs.getString("company") + " | " + rs.getString("date") + "<br>");
+                System.out.println(rs.getString("title") + " | " + rs.getString("company") + " | " + rs.getString("date"));
             }
 		} catch (SQLException ex){
 			System.out.println("SQLException: " + ex.getMessage());

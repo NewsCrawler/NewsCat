@@ -43,56 +43,6 @@
           	신문사
           	0000-00-00 00:00:00
           </li>
-          <li class="list-group-item">
-          	<strong>기사제목</strong>
-          	신문사
-          	0000-00-00 00:00:00
-          </li>
-          <li class="list-group-item">
-          	<strong>기사제목</strong>
-          	신문사
-          	0000-00-00 00:00:00
-          </li>
-          <li class="list-group-item">
-          	<strong>기사제목</strong>
-          	신문사
-          	0000-00-00 00:00:00
-          </li>
-          <li class="list-group-item">
-          	<strong>기사제목</strong>
-          	신문사
-          	0000-00-00 00:00:00
-          </li>
-          <li class="list-group-item">
-          	<strong>기사제목</strong>
-          	신문사
-          	0000-00-00 00:00:00
-          </li>
-          <li class="list-group-item">
-          	<strong>기사제목</strong>
-          	신문사
-          	0000-00-00 00:00:00
-          </li>
-          <li class="list-group-item">
-          	<strong>기사제목</strong>
-          	신문사
-          	0000-00-00 00:00:00
-          </li>
-          <li class="list-group-item">
-          	<strong>기사제목</strong>
-          	신문사
-          	0000-00-00 00:00:00
-          </li>
-          <li class="list-group-item">
-          	<strong>기사제목</strong>
-          	신문사
-          	0000-00-00 00:00:00
-          </li>
-          <li class="list-group-item">
-          	<strong>기사제목</strong>
-          	신문사
-          	0000-00-00 00:00:00
-          </li>
         </ul>
       </div>
     </div>
