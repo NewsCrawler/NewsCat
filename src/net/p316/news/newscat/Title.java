@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.p316.news.newscat.util.MySQLConnector;
+
 /**
  * Servlet implementation class Title
  */
@@ -29,6 +31,8 @@ public class Title extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		MySQLConnector conn = new MySQLConnector();
+		conn.get_Values();
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/JSP/title.jsp");
 		dispatcher.forward(request,response);
 	}
