@@ -1,6 +1,13 @@
 package net.p316.news.newscat.util;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import net.p316.news.newscat.data.NcTitle;
 
 public class MySQLConnector {
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -23,7 +30,8 @@ public class MySQLConnector {
 		}
 	}
 	
-	public void get_Values() {
+	public ArrayList<NcTitle> get_Values() {
+		ArrayList<NcTitle> data = new ArrayList<NcTitle>();
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
@@ -32,13 +40,21 @@ public class MySQLConnector {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
-                System.out.println(rs.getString("title") + " | " + rs.getString("company") + " | " + rs.getString("date"));
+                NcTitle temp = new NcTitle();
+                temp.set_idx(rs.getInt("idx"));
+                temp.set_idx_category(rs.getInt("idx_category"));
+                temp.set_url(rs.getString("url"));
+                temp.set_title(rs.getString("title"));
+                temp.set_company(rs.getString("company"));
+                temp.set_date(rs.getDate("date"));
+                data.add(temp);
+				//System.out.println(rs.getString("title") + " | " + rs.getString("company") + " | " + rs.getString("date"));
             }
 		} catch (SQLException ex){
 			System.out.println("SQLException: " + ex.getMessage());
 		} catch (Exception ex){
-			
 		}
+		return data;
 	}
 
 }
