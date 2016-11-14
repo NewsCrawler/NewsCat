@@ -36,6 +36,10 @@ public class MySQLConnector
 		}
 	}
 	
+	public void close(){
+		if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+	}
+	
 	public int get_Recordcnt() 
 	{
 		int rowcnt = 0;
