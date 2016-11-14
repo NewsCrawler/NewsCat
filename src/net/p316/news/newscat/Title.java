@@ -41,7 +41,7 @@ public class Title extends HttpServlet
 		// TODO Auto-generated method stub
 		MySQLConnector conn = new MySQLConnector();
 		ArrayList<NcTitle> data = new ArrayList<NcTitle>();
-		int totalpagecnt = conn.get_Recordcnt() / PAGE_RECORDCNT;
+		int totalpagecnt = conn.get_Recordcnt() / PAGE_RECORDCNT + 1;
 		//전체 페이지 갯수
 		int crtpage = 1;
 		if(request.getParameter("page") != null)
@@ -52,7 +52,7 @@ public class Title extends HttpServlet
 		data = conn.get_Values(crtpage);
 		request.setAttribute("data", data);
 		request.setAttribute("crtpage", crtpage);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/JSP/test.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/JSP/test.jsp"); //<-- 이거 test.jsp에서 title.jsp로 바꿔야되요
 		dispatcher.forward(request,response);
 	}
 
