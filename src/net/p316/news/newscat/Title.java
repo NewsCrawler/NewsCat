@@ -50,6 +50,7 @@ public class Title extends HttpServlet
 		}
 		String test = request.getParameter("test");
 		data = conn.get_Values(crtpage);
+		conn.close();
 		request.setAttribute("data", data);
 		request.setAttribute("crtpage", crtpage);
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/JSP/test.jsp"); //<-- 이거 test.jsp에서 title.jsp로 바꿔야되요
