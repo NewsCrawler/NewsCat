@@ -58,6 +58,9 @@ public class MySQLConnector
 		} 
 		catch (Exception ex)
 		{
+		} finally {
+			if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+	        if (stmt != null) try { stmt.close(); } catch(SQLException ex) {}
 		}
 		
 		return rowcnt;
@@ -94,6 +97,9 @@ public class MySQLConnector
 		catch (Exception ex)
 		{
 			System.out.println("Exception: " + ex.getMessage());
+		} finally {
+			if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+	        if (stmt != null) try { stmt.close(); } catch(SQLException ex) {}
 		}
 		return data;
 	}
