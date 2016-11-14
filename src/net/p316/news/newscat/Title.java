@@ -20,7 +20,10 @@ import net.p316.news.newscat.util.MySQLConnector;
 public class Title extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
-       
+	static final int PAGE_RECORDCNT = 25;
+	//페이지당 보여줄 레코드 갯수
+	static final int PAGE_PAGECNT = 5;
+	//페이지당 보여줄 페이지 갯수(ex. [1], [2], [3], [4], [5])
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -38,10 +41,17 @@ public class Title extends HttpServlet
 		// TODO Auto-generated method stub
 		MySQLConnector conn = new MySQLConnector();
 		ArrayList<NcTitle> data = new ArrayList<NcTitle>();
-		int pagecnt;
-		pagecnt = conn.get_Pagecount();
-		data = conn.get_Values();
+		int totalpagecnt = conn.get_Recordcnt() / PAGE_RECORDCNT;
+		//전체 페이지 갯수
+		int crtpage = 1;
+		if(request.getParameter("page") != null)
+		{
+			crtpage = Integer.parseInt(request.getParameter("page"));
+		}
+		String test = request.getParameter("test");
+		data = conn.get_Values(crtpage);
 		request.setAttribute("data", data);
+		request.setAttribute("crtpage", crtpage);
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/JSP/test.jsp");
 		dispatcher.forward(request,response);
 	}

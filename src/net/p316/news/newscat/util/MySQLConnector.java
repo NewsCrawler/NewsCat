@@ -15,8 +15,8 @@ public class MySQLConnector
 	static final String DB_URL = "jdbc:mysql://news.p316.net/news_crawler";
 	static final String USER = "crawler";
 	static final String PASS = "4X\"Zd@JaTs\\Yk<c]";
-	static final int PAGE_SHOWCNT = 25;
-
+	
+	
 	private DriverManager driverManager;
 	private Connection conn = null;
 	
@@ -36,7 +36,7 @@ public class MySQLConnector
 		}
 	}
 	
-	public int get_Pagecount() 
+	public int get_Recordcnt() 
 	{
 		int rowcnt = 0;
 		Statement stmt = null;
@@ -60,18 +60,19 @@ public class MySQLConnector
 		{
 		}
 		
-		return rowcnt/PAGE_SHOWCNT + 1;
+		return rowcnt;
 	}
 	
-	public ArrayList<NcTitle> get_Values() 
+	public ArrayList<NcTitle> get_Values(int crtpage) 
 	{
 		ArrayList<NcTitle> data = new ArrayList<NcTitle>();
 		Statement stmt = null;
 		ResultSet rs = null;
+		crtpage--;
 		try 
 		{
 			Class.forName("com.mysql.jdbc.Driver");
-			String sql = "SELECT * FROM `nc_title` LIMIT 25";
+			String sql = "SELECT * FROM `nc_title` LIMIT " + crtpage * 25 + ", 25";
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) 

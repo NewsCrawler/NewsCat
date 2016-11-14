@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import = "java.util.*"%>
-   	<%@ page import = "net.p316.news.newscat.data.NcTitle"
-     %>
+   	<%@ page import = "net.p316.news.newscat.data.NcTitle"%>
     <%
-    	ArrayList<NcTitle> data = (ArrayList<NcTitle>) request.getAttribute("data");
+    ArrayList<NcTitle> data = (ArrayList<NcTitle>) request.getAttribute("data");
+	int crtpage = (int) request.getAttribute("crtpage");
     %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
