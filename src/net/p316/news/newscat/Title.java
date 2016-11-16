@@ -1,7 +1,10 @@
 package net.p316.news.newscat;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,6 +27,7 @@ public class Title extends HttpServlet
 	//페이지당 보여줄 레코드 갯수
 	static final int PAGE_PAGECNT = 5;
 	//페이지당 보여줄 페이지 갯수(ex. [1], [2], [3], [4], [5])
+	static final String DATEFORMAT = new String("yyyyMMdd");
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -44,15 +48,49 @@ public class Title extends HttpServlet
 		int totalpagecnt = conn.get_Recordcnt() / PAGE_RECORDCNT + 1;
 		//전체 페이지 갯수
 		int crtpage = 1;
+		SimpleDateFormat sdf = new SimpleDateFormat(DATEFORMAT);
+		Date sdate = null;
+		//시작 날짜
+		Date edate = null;
+		//끝 날짜
 		if(request.getParameter("page") != null)
 		{
 			crtpage = Integer.parseInt(request.getParameter("page"));
 		}
+		
+		if(request.getParameter("sdate") != null)
+		{
+			try 
+			{
+				sdate = sdf.parse(request.getParameter("sdate"));
+			} 
+			catch (ParseException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		if(request.getParameter("edate") != null)
+		{
+			try 
+			{
+				edate = sdf.parse(request.getParameter("edate"));
+			} 
+			catch (ParseException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		String test = request.getParameter("test");
 		data = conn.get_Values(crtpage);
 		conn.close();
 		request.setAttribute("data", data);
 		request.setAttribute("crtpage", crtpage);
+		System.out.println("s : "+sdate);
+		System.out.println("e : "+edate);
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/JSP/test.jsp"); //<-- 이거 test.jsp에서 title.jsp로 바꿔야되요
 		dispatcher.forward(request,response);
 	}

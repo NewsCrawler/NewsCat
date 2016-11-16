@@ -75,11 +75,10 @@ public class MySQLConnector
 		ArrayList<NcTitle> data = new ArrayList<NcTitle>();
 		Statement stmt = null;
 		ResultSet rs = null;
-		crtpage--;
 		try 
 		{
 			Class.forName("com.mysql.jdbc.Driver");
-			String sql = "SELECT * FROM `nc_title` LIMIT " + crtpage * 25 + ", 25";
+			String sql = "SELECT * FROM `nc_title` LIMIT " + (crtpage - 1) * 25 + ", 25";
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) 
