@@ -27,7 +27,6 @@ public class Title extends HttpServlet
 	//페이지당 보여줄 레코드 갯수
 	static final int PAGE_PAGECNT = 5;
 	//페이지당 보여줄 페이지 갯수(ex. [1], [2], [3], [4], [5])
-	static final String DATEFORMAT = new String("yyyyMMdd");
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -48,10 +47,9 @@ public class Title extends HttpServlet
 		int totalpagecnt = conn.get_Recordcnt() / PAGE_RECORDCNT + 1;
 		//전체 페이지 갯수
 		int crtpage = 1;
-		SimpleDateFormat sdf = new SimpleDateFormat(DATEFORMAT);
-		Date sdate = null;
+		String sdate = null;
 		//시작 날짜
-		Date edate = null;
+		String edate = null;
 		//끝 날짜
 		if(request.getParameter("page") != null)
 		{
@@ -60,28 +58,12 @@ public class Title extends HttpServlet
 		
 		if(request.getParameter("sdate") != null)
 		{
-			try 
-			{
-				sdate = sdf.parse(request.getParameter("sdate"));
-			} 
-			catch (ParseException e) 
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			sdate = request.getParameter("sdate");
 		}
 		
 		if(request.getParameter("edate") != null)
 		{
-			try 
-			{
-				edate = sdf.parse(request.getParameter("edate"));
-			} 
-			catch (ParseException e) 
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			edate = request.getParameter("edate");
 		}
 		
 		String test = request.getParameter("test");

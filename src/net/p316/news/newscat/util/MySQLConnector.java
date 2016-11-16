@@ -17,7 +17,6 @@ public class MySQLConnector
 	static final String USER = "crawler";
 	static final String PASS = "4X\"Zd@JaTs\\Yk<c]";
 	
-	
 	private DriverManager driverManager;
 	private Connection conn = null;
 	
@@ -97,15 +96,19 @@ public class MySQLConnector
 		return rowcnt;
 	}
 	
-	public ArrayList<NcTitle> get_Values(int crtpage, Date sdate, Date edate) 
+	public ArrayList<NcTitle> get_Values(int crtpage, String sdate, String edate) 
 	{
 		ArrayList<NcTitle> data = new ArrayList<NcTitle>();
 		Statement stmt = null;
 		ResultSet rs = null;
+		String sql = null;
 		try 
 		{
 			Class.forName("com.mysql.jdbc.Driver");
-			String sql = "SELECT * FROM `nc_title` LIMIT " + (crtpage - 1) * 25 + ", 25";
+			if(sdate == null || edate == null)
+				sql = "SELECT * FROM `nc_title` LIMIT " + (crtpage - 1) * 25 + ", 25";
+			else
+				sql = "SELECT * FROM `nc_title` WHERE `date` BETWEEN '" + sdate + "' AND '" + edate + "' LIMIT " + (crtpage - 1) * 25 + ", 25";
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) 
