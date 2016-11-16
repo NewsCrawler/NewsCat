@@ -4,6 +4,7 @@
    	<%@ page import = "net.p316.news.newscat.data.NcTitle"%>
     <%
     ArrayList<NcTitle> data = (ArrayList<NcTitle>) request.getAttribute("data");
+    int totalpagecnt = (int) request.getAttribute("totalpagecnt");
 	int crtpage = (int) request.getAttribute("crtpage");
     %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -16,10 +17,20 @@
 	<%
 		for(int i=0; i<25; i++) 
 		{
+	%>
+	<li>
+	<%
 			out.println(data.get(i).get_title());
 	%>
-			<br>
+	</li>
 	<%
+		}
+	%>
+	<br><br>
+	<%
+		for(int i=0; i<totalpagecnt; i++)
+		{
+			
 		}
 	%>
 </body>

@@ -70,6 +70,9 @@ public class Title extends HttpServlet
 		data = conn.get_Values(crtpage, sdate, edate);
 		conn.close();
 		request.setAttribute("data", data);
+		request.setAttribute("page_recordcnt", PAGE_RECORDCNT);
+		request.setAttribute("totalpagecnt", totalpagecnt);
+		request.setAttribute("page_pagecnt", PAGE_PAGECNT);
 		request.setAttribute("crtpage", crtpage);
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/JSP/title.jsp");
 		dispatcher.forward(request,response);
