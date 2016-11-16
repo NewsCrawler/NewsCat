@@ -85,13 +85,11 @@ public class Title extends HttpServlet
 		}
 		
 		String test = request.getParameter("test");
-		data = conn.get_Values(crtpage);
+		data = conn.get_Values(crtpage, sdate, edate);
 		conn.close();
 		request.setAttribute("data", data);
 		request.setAttribute("crtpage", crtpage);
-		System.out.println("s : "+sdate);
-		System.out.println("e : "+edate);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/JSP/test.jsp"); //<-- 이거 test.jsp에서 title.jsp로 바꿔야되요
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/JSP/test.jsp");
 		dispatcher.forward(request,response);
 	}
 

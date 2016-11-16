@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>index page</title>
+<title>Semantic</title>
 </head>
 <body>
-안녕하세요! 뉴스크롤러입니다!
+의미망분석 페이지
 </body>
 </html>

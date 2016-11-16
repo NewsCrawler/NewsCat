@@ -10,17 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Index
+ * Servlet implementation class Semantic
  */
-@WebServlet("/")
-public class Index extends HttpServlet 
+@WebServlet("/Semantic")
+public class Semantic extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Index() 
+    public Semantic() 
     {
         super();
         // TODO Auto-generated constructor stub
@@ -32,7 +32,7 @@ public class Index extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		// TODO Auto-generated method stub
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/JSP/index.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/JSP/semantic.jsp");
 		dispatcher.forward(request,response);
 	}
 

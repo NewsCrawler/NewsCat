@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 
 import net.p316.news.newscat.data.NcTitle;
 
@@ -37,7 +38,15 @@ public class MySQLConnector
 	}
 	
 	public void close(){
-		if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+		if (conn != null) 
+			try 
+			{ 
+				conn.close(); 
+			} 
+		catch(SQLException ex) 
+		{
+			System.out.println("SQLException: " + ex.getMessage());
+		}
 	}
 	
 	public int get_Recordcnt() 
@@ -62,15 +71,33 @@ public class MySQLConnector
 		} 
 		catch (Exception ex)
 		{
-		} finally {
-			if (rs != null) try { rs.close(); } catch(SQLException ex) {}
-	        if (stmt != null) try { stmt.close(); } catch(SQLException ex) {}
+			System.out.println("SQLException: " + ex.getMessage());
+		} 
+		finally 
+		{
+			if (rs != null) 
+				try 
+				{ 
+					rs.close(); 
+				} 
+			catch(SQLException ex) 
+			{
+			}
+	        if (stmt != null) 
+	        	try 
+	        	{ 
+	        		stmt.close(); 
+	        	} 
+	        catch(SQLException ex) 
+	        {
+	        	System.out.println("SQLException: " + ex.getMessage());
+	        }
 		}
 		
 		return rowcnt;
 	}
 	
-	public ArrayList<NcTitle> get_Values(int crtpage) 
+	public ArrayList<NcTitle> get_Values(int crtpage, Date sdate, Date edate) 
 	{
 		ArrayList<NcTitle> data = new ArrayList<NcTitle>();
 		Statement stmt = null;
@@ -100,9 +127,26 @@ public class MySQLConnector
 		catch (Exception ex)
 		{
 			System.out.println("Exception: " + ex.getMessage());
-		} finally {
-			if (rs != null) try { rs.close(); } catch(SQLException ex) {}
-	        if (stmt != null) try { stmt.close(); } catch(SQLException ex) {}
+		} 
+		finally 
+		{
+			if (rs != null) 
+				try 
+				{ 
+					rs.close(); 
+				} 
+			catch(SQLException ex) 
+			{
+				System.out.println("SQLException: " + ex.getMessage());
+			}
+	        if (stmt != null) 
+	        	try 
+	        	{ 
+	        		stmt.close(); 
+	        	} catch(SQLException ex) 
+	        {
+	        		System.out.println("SQLException: " + ex.getMessage());
+	        }
 		}
 		return data;
 	}
