@@ -34,24 +34,55 @@ public class Graph extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
 		
 		Gson gson = new Gson();
 		
 		String json = "{ \"graph\" : [], ";
 		
 		ArrayList<JLink> links = new ArrayList<JLink>();
-		links.add(new JLink());
-		links.add(new JLink());
-		links.add(new JLink());
+		links.add(new JLink(0, 1));
+		links.add(new JLink(0, 2));
+		links.add(new JLink(0, 3));
+		links.add(new JLink(0, 4));
+		links.add(new JLink(0, 5));
+		links.add(new JLink(0, 6));
+		links.add(new JLink(0, 7));
+		links.add(new JLink(1, 3));
+		links.add(new JLink(1, 4));
+		links.add(new JLink(1, 5));
+		links.add(new JLink(1, 6));
+		links.add(new JLink(1, 8));
+		links.add(new JLink(2, 4));
+		links.add(new JLink(2, 5));
+		links.add(new JLink(2, 6));
+		links.add(new JLink(2, 9));
+		links.add(new JLink(3, 5));
+		links.add(new JLink(3, 6));
+		links.add(new JLink(3, 10));
+		links.add(new JLink(4, 11));
+		links.add(new JLink(5, 6));
+		links.add(new JLink(5, 12));
+		links.add(new JLink(6, 13));
 		
 		ArrayList<JNode> nodes = new ArrayList<JNode>();
-		nodes.add(new JNode());
-		nodes.add(new JNode());
-		nodes.add(new JNode());
-		nodes.add(new JNode());
+		nodes.add(new JNode(80,1,"테스트1"));
+		nodes.add(new JNode(10,1,"테스트1"));
+		nodes.add(new JNode(30,1,"테스트1"));
+		nodes.add(new JNode(60,1,"테스트1"));
+		nodes.add(new JNode(60,0.4,"테스트1"));
+		nodes.add(new JNode(40,0.4,"테스트1"));
+		nodes.add(new JNode(20,0.4,"테스트1"));
+		nodes.add(new JNode(30,0.4,"테스트1"));
+		nodes.add(new JNode(10,0.4,"테스트1"));
+		nodes.add(new JNode(20,0.4,"테스트1"));
+		nodes.add(new JNode(60,0.1,"테스트1"));
+		nodes.add(new JNode(60,0.1,"테스트1"));
+		nodes.add(new JNode(60,0.1,"테스트1"));
+		nodes.add(new JNode(20,0.1,"테스트1"));
 		
-		json += new Gson().toJson(links);
-		json += new Gson().toJson(nodes);
+		json += "\"links\" :" + new Gson().toJson(links) + ", ";
+		json += "\"nodes\" :" + new Gson().toJson(nodes) + ", ";
 		json += "\"directed\": false, \"multigraph\": false }";
 		
 		response.getWriter().append(json);

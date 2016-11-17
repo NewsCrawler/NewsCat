@@ -5,10 +5,10 @@
 <%@ page import = "net.p316.news.newscat.data.NcTitle"%>
 <%
 ArrayList<NcTitle> data = (ArrayList<NcTitle>) request.getAttribute("data");
-int totalpagecnt = (int) request.getAttribute("totalpagecnt");
-int page_pagecnt = (int) request.getAttribute("page_pagecnt");
-int page_recordcnt = (int) request.getAttribute("page_recordcnt");
-int crtpage = (int) request.getAttribute("crtpage");
+int totalpagecnt = Integer.parseInt(request.getAttribute("totalpagecnt").toString());
+int page_pagecnt = Integer.parseInt(request.getAttribute("page_pagecnt").toString());
+int page_recordcnt = Integer.parseInt(request.getAttribute("page_recordcnt").toString());
+int crtpage = Integer.parseInt(request.getAttribute("crtpage").toString());
 %>
 
 <div class="container">

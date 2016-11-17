@@ -2,19 +2,37 @@
     pageEncoding="UTF-8"%>
 <%@ include file="template/header.jsp" %>
 
-<script src="http://d3js.org/d3.v3.min.js"></script>
+<%
+String jsonPath = "/Graph";
+%>
+
+<div class="container">
+	<div id="graph">
+	</div>
+</div>
 
 <style>
+#graph{
+	border: 1px solid black;
+	height: 480px;
+	margin: 0px;
+	overflow: hidden;
+}
 text {
 	font-family: sans-serif;
 	pointer-events: none;
 }
 </style>
-
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
-var w = window.innerWidth;
-var h = window.innerHeight;
+//var w = window.innerWidth;
+//var h = window.innerHeight;
+
+var ww = document.getElementById('graph').offsetWidth;
+var hh = document.getElementById('graph').offsetHeight;
+
+var w = ww;
+var h = hh;
 
 var keyc = true, keys = true, keyt = true, keyr = true, keyx = true, keyd = true, keyl = true, keym = true, keyh = true, key1 = true, key2 = true, key3 = true, key0 = true
 
@@ -53,12 +71,12 @@ var max_stroke = 4.5;
 var max_base_node_size = 36;
 var min_zoom = 0.1;
 var max_zoom = 7;
-var svg = d3.select("body").append("svg");
+var svg = d3.select("#graph").append("svg");
 var zoom = d3.behavior.zoom().scaleExtent([min_zoom,max_zoom])
 var g = svg.append("g");
 svg.style("cursor","move");
 
-d3.json("/res/js/graph.json", function(error, graph) {
+d3.json("<%=jsonPath%>", function(error, graph) {
 
 var linkedByIndex = {};
     graph.links.forEach(function(d) {
@@ -101,8 +119,8 @@ var linkedByIndex = {};
 
 	
 	node.on("dblclick.zoom", function(d) { d3.event.stopPropagation();
-	var dcx = (window.innerWidth/2-d.x*zoom.scale());
-	var dcy = (window.innerHeight/2-d.y*zoom.scale());
+	var dcx = (ww/2-d.x*zoom.scale());
+	var dcy = (hh/2-d.y*zoom.scale());
 	zoom.translate([dcx,dcy]);
 	 g.attr("transform", "translate("+ dcx + "," + dcy  + ")scale(" + zoom.scale() + ")");
 	 
@@ -277,7 +295,7 @@ function set_highlight(d)
 	});
   
   function resize() {
-    var width = window.innerWidth, height = window.innerHeight;
+    var width = ww, height = hh;
 	svg.attr("width", width).attr("height", height);
     
 	force.size([force.size()[0]+(width-w)/zoom.scale(),force.size()[1]+(height-h)/zoom.scale()]).resume();
