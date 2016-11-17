@@ -28,7 +28,7 @@ int crtpage = (int) request.getAttribute("crtpage");
 		%>
 			<tr>
 				<td></td>
-				<td><a href="<%data.get(i).get_url();%>" target="_blank">
+				<td><a href="<%=data.get(i).get_url()%>" target="_blank">
 				<%
 				out.println(data.get(i).get_title());
 		   		%>
