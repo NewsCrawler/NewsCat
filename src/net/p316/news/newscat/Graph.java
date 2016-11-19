@@ -36,6 +36,9 @@ public class Graph extends HttpServlet {
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		
+		int dDay = 0;
+		if(request.getParameterMap().containsKey("dDay")) dDay = Integer.parseInt(request.getParameter("keyword"));
+		
 		Gson gson = new Gson();
 		
 		String json = "{ \"graph\" : [], ";
@@ -66,20 +69,20 @@ public class Graph extends HttpServlet {
 		links.add(new JLink(6, 13));
 		
 		ArrayList<JNode> nodes = new ArrayList<JNode>();
-		nodes.add(new JNode(80,1,"테스트1"));
-		nodes.add(new JNode(10,1,"테스트1"));
-		nodes.add(new JNode(30,1,"테스트1"));
-		nodes.add(new JNode(60,1,"테스트1"));
-		nodes.add(new JNode(60,0.4,"테스트1"));
-		nodes.add(new JNode(40,0.4,"테스트1"));
-		nodes.add(new JNode(20,0.4,"테스트1"));
-		nodes.add(new JNode(30,0.4,"테스트1"));
-		nodes.add(new JNode(10,0.4,"테스트1"));
-		nodes.add(new JNode(20,0.4,"테스트1"));
-		nodes.add(new JNode(60,0.1,"테스트1"));
-		nodes.add(new JNode(60,0.1,"테스트1"));
-		nodes.add(new JNode(60,0.1,"테스트1"));
-		nodes.add(new JNode(20,0.1,"테스트1"));
+		nodes.add(new JNode(80,1,"테스트" + dDay));
+		nodes.add(new JNode(10,1,"테스트" + dDay));
+		nodes.add(new JNode(30,1,"테스트" + dDay));
+		nodes.add(new JNode(60,1,"테스트" + dDay));
+		nodes.add(new JNode(60,0.4,"테스트" + dDay));
+		nodes.add(new JNode(40,0.4,"테스트" + dDay));
+		nodes.add(new JNode(20,0.4,"테스트" + dDay));
+		nodes.add(new JNode(30,0.4,"테스트" + dDay));
+		nodes.add(new JNode(10,0.4,"테스트" + dDay));
+		nodes.add(new JNode(20,0.4,"테스트" + dDay));
+		nodes.add(new JNode(60,0.1,"테스트" + dDay));
+		nodes.add(new JNode(60,0.1,"테스트" + dDay));
+		nodes.add(new JNode(60,0.1,"테스트" + dDay));
+		nodes.add(new JNode(20,0.1,"테스트" + dDay));
 		
 		json += "\"links\" :" + new Gson().toJson(links) + ", ";
 		json += "\"nodes\" :" + new Gson().toJson(nodes) + ", ";
