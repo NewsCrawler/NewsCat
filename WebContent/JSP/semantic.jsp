@@ -2,9 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="template/header.jsp" %>
 
-<%
-String jsonPath = "/Graph?dDay=0";
-%>
+<% String jsonPath = "/Graph?dDay=0"; %>
 
 <div class="container">
 	<div class="col-md-12">
@@ -18,7 +16,6 @@ String jsonPath = "/Graph?dDay=0";
 		</div>
 	</div>
 </div>
-
 <style>
 #graph{
 	border: 1px solid black;
@@ -31,6 +28,7 @@ text {
 	pointer-events: none;
 }
 </style>
+
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
 //var w = window.innerWidth;
@@ -369,9 +367,8 @@ function vis_by_link_score(score) {
 }
 
 function isNumber(n) {
-return !isNaN(parseFloat(n)) && isFinite(n);
+  return !isNaN(parseFloat(n)) && isFinite(n);
 }
-
 </script>
 
 <%@ include file="template/footer.jsp" %>

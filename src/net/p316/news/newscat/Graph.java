@@ -59,14 +59,16 @@ public class Graph extends HttpServlet {
 		links.add(new JLink(2, 4));
 		links.add(new JLink(2, 5));
 		links.add(new JLink(2, 6));
-		links.add(new JLink(2, 9));
-		links.add(new JLink(3, 5));
-		links.add(new JLink(3, 6));
-		links.add(new JLink(3, 10));
-		links.add(new JLink(4, 11));
-		links.add(new JLink(5, 6));
-		links.add(new JLink(5, 12));
-		links.add(new JLink(6, 13));
+		if(dDay > 3) {
+			links.add(new JLink(2, 9));
+			links.add(new JLink(3, 5));
+			links.add(new JLink(3, 6));
+			links.add(new JLink(3, 10));
+			links.add(new JLink(4, 11));
+			links.add(new JLink(5, 6));
+			links.add(new JLink(5, 12));
+			links.add(new JLink(6, 13));
+		}
 		
 		ArrayList<JNode> nodes = new ArrayList<JNode>();
 		nodes.add(new JNode(80,1,"테스트" + Integer.toString(dDay)));
@@ -78,11 +80,13 @@ public class Graph extends HttpServlet {
 		nodes.add(new JNode(20,0.4,"테스트" + Integer.toString(dDay)));
 		nodes.add(new JNode(30,0.4,"테스트" + Integer.toString(dDay)));
 		nodes.add(new JNode(10,0.4,"테스트" + Integer.toString(dDay)));
-		nodes.add(new JNode(20,0.4,"테스트" + Integer.toString(dDay)));
-		nodes.add(new JNode(60,0.1,"테스트" + Integer.toString(dDay)));
-		nodes.add(new JNode(60,0.1,"테스트" + Integer.toString(dDay)));
-		nodes.add(new JNode(60,0.1,"테스트" + Integer.toString(dDay)));
-		nodes.add(new JNode(20,0.1,"테스트" + Integer.toString(dDay)));
+		if(dDay > 3){
+			nodes.add(new JNode(20,0.4,"테스트" + Integer.toString(dDay)));
+			nodes.add(new JNode(60,0.1,"테스트" + Integer.toString(dDay)));
+			nodes.add(new JNode(60,0.1,"테스트" + Integer.toString(dDay)));
+			nodes.add(new JNode(60,0.1,"테스트" + Integer.toString(dDay)));
+			nodes.add(new JNode(20,0.1,"테스트" + Integer.toString(dDay)));
+		}
 		
 		json += "\"links\" :" + new Gson().toJson(links) + ", ";
 		json += "\"nodes\" :" + new Gson().toJson(nodes) + ", ";
