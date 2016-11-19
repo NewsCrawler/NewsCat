@@ -39,6 +39,9 @@ public class Graph extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// check request getParam
+		int dDay = 0;
+		if(request.getParameterMap().containsKey("dDay")) dDay = Integer.parseInt(request.getParameter("dDay"));
+		
 		Date sdate = Date.valueOf("2016-10-25");
 		Date edate = Date.valueOf("2016-11-13");
 		
@@ -54,6 +57,7 @@ public class Graph extends HttpServlet {
 		String[] wordID = new String[size];
 		double[] wordCate = new double[size];
 		boolean[] usedID = new boolean[size];
+		int[] cntID = new int[size];
 		
 		Iterator<WordTableDTO> itw = wto.iterator();
 		WordTableDTO wo = null;
@@ -84,26 +88,34 @@ public class Graph extends HttpServlet {
 			usedID[gto.get(i).getIdx_word()] = true;
 			if(gto.get(i-1).getIdx_title() != gto.get(i).getIdx_title()){
 				for(int j=w; j<i; j++){
-					for(int k=w; k<i; k++){
+					for(int k=j; k<i; k++){
 						if(j == k) continue;
 						if(gto.get(j).getIdx_word() == gto.get(k).getIdx_word()) continue;
 						matrix[gto.get(j).getIdx_word()][gto.get(k).getIdx_word()]++;
 						matrix[gto.get(k).getIdx_word()][gto.get(j).getIdx_word()]++;
-						if(maxNodes < matrix[gto.get(k).getIdx_word()][gto.get(j).getIdx_word()])
-							maxNodes = matrix[gto.get(k).getIdx_word()][gto.get(j).getIdx_word()];
+						cntID[gto.get(j).getIdx_word()]++;
+						cntID[gto.get(k).getIdx_word()]++;
+						if(maxNodes < cntID[gto.get(j).getIdx_word()])
+							maxNodes = cntID[gto.get(j).getIdx_word()];
+						if(maxNodes < cntID[gto.get(k).getIdx_word()])
+							maxNodes = cntID[gto.get(k).getIdx_word()];
 					}
 				}
 				w = i;
 			}
 		}
-		for(int j=w; j<gto.size(); j++){
-			for(int k=w; k<gto.size(); k++){
+		for(int j=w; j<=gto.size(); j++){
+			for(int k=j; k<gto.size(); k++){
 				if(j == k) continue;
 				if(gto.get(j).getIdx_word() == gto.get(k).getIdx_word()) continue;
 				matrix[gto.get(j).getIdx_word()][gto.get(k).getIdx_word()]++;
 				matrix[gto.get(k).getIdx_word()][gto.get(j).getIdx_word()]++;
-				if(maxNodes < matrix[gto.get(k).getIdx_word()][gto.get(j).getIdx_word()])
-					maxNodes = matrix[gto.get(k).getIdx_word()][gto.get(j).getIdx_word()];
+				cntID[gto.get(j).getIdx_word()]++;
+				cntID[gto.get(k).getIdx_word()]++;
+				if(maxNodes < cntID[gto.get(j).getIdx_word()])
+					maxNodes = cntID[gto.get(j).getIdx_word()];
+				if(maxNodes < cntID[gto.get(k).getIdx_word()])
+					maxNodes = cntID[gto.get(k).getIdx_word()];
 			}
 		}
 
@@ -111,56 +123,31 @@ public class Graph extends HttpServlet {
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		
-		int dDay = 0;
-		if(request.getParameterMap().containsKey("dDay")) dDay = Integer.parseInt(request.getParameter("dDay"));
-		
 		Gson gson = new Gson();
 		
 		String json = "{ \"graph\" : [], ";
 		
 		ArrayList<JLink> links = new ArrayList<JLink>();
-		links.add(new JLink(0, 1));
-		links.add(new JLink(0, 2));
-		links.add(new JLink(0, 3));
-		links.add(new JLink(0, 4));
-		links.add(new JLink(0, 5));
-		links.add(new JLink(0, 6));
-		links.add(new JLink(0, 7));
-		links.add(new JLink(1, 3));
-		links.add(new JLink(1, 4));
-		links.add(new JLink(1, 5));
-		links.add(new JLink(1, 6));
-		links.add(new JLink(1, 8));
-		links.add(new JLink(2, 4));
-		links.add(new JLink(2, 5));
-		links.add(new JLink(2, 6));
-		if(dDay > 3) {
-			links.add(new JLink(2, 9));
-			links.add(new JLink(3, 5));
-			links.add(new JLink(3, 6));
-			links.add(new JLink(3, 10));
-			links.add(new JLink(4, 11));
-			links.add(new JLink(5, 6));
-			links.add(new JLink(5, 12));
-			links.add(new JLink(6, 13));
+		for(int i=1; i<size; i++){
+			for(int j=1; j<i; j++){
+				if(matrix[i][j] > 0) {
+					links.add(new JLink(i, j));
+				}
+			}
 		}
 		
 		ArrayList<JNode> nodes = new ArrayList<JNode>();
-		nodes.add(new JNode(80,1,"테스트" + Integer.toString(dDay)));
-		nodes.add(new JNode(10,1,"테스트" + Integer.toString(dDay)));
-		nodes.add(new JNode(30,1,"테스트" + Integer.toString(dDay)));
-		nodes.add(new JNode(60,1,"테스트" + Integer.toString(dDay)));
-		nodes.add(new JNode(60,0.4,"테스트" + Integer.toString(dDay)));
-		nodes.add(new JNode(40,0.4,"테스트" + Integer.toString(dDay)));
-		nodes.add(new JNode(20,0.4,"테스트" + Integer.toString(dDay)));
-		nodes.add(new JNode(30,0.4,"테스트" + Integer.toString(dDay)));
-		nodes.add(new JNode(10,0.4,"테스트" + Integer.toString(dDay)));
-		if(dDay > 3){
-			nodes.add(new JNode(20,0.4,"테스트" + Integer.toString(dDay)));
-			nodes.add(new JNode(60,0.1,"테스트" + Integer.toString(dDay)));
-			nodes.add(new JNode(60,0.1,"테스트" + Integer.toString(dDay)));
-			nodes.add(new JNode(60,0.1,"테스트" + Integer.toString(dDay)));
-			nodes.add(new JNode(20,0.1,"테스트" + Integer.toString(dDay)));
+		nodes.add(new JNode(60,0.4,"null"));
+		for(int i=0; i<size; i++){
+			if(usedID[i]){
+				// 노드의 크기를 평탄화 시키려면 x^2를 써야함
+				int nodeSize = 20;
+				if(cntID[i] > 100) nodeSize += 20;
+				if(cntID[i] > 500) nodeSize += 20;
+				if(cntID[i] > 1000) nodeSize += 20;
+				if(cntID[i] > 2000) nodeSize += 20;
+				nodes.add(new JNode(nodeSize, wordCate[i], wordID[i]));
+			}
 		}
 		
 		json += "\"links\" :" + new Gson().toJson(links) + ", ";
