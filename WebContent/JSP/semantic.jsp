@@ -3,13 +3,13 @@
 <%@ include file="template/header.jsp" %>
 
 <%
-String jsonPath = "/Graph";
+String jsonPath = "/Graph?dDay=3";
 %>
 
 <div class="container">
 	<div class="col-md-12">
 		<div class="row" style="margin-top:40px; margin-bottom:40px;">
-			<strong style="margin-right:10px;">D-Day :</strong>
+			<strong style="margin-right:10px;">D-Day +</strong>
 			<input id="ex8" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="27" data-slider-step="1" data-slider-value="0"/>
 		</div>
 		
@@ -53,20 +53,20 @@ var min_score = 0;
 var max_score = 1;
 
 var color = d3.scale.linear()
-  .domain([min_score, (min_score+max_score)/2, max_score])
-  .range(["lime", "yellow", "red"]);
+	.domain([min_score, (min_score+max_score)/2, max_score])
+	.range(["lime", "yellow", "red"]);
 
 var highlight_color = "blue";
 var highlight_trans = 0.1;
   
 var size = d3.scale.pow().exponent(1)
-  .domain([1,100])
-  .range([8,24]);
+	.domain([1,100])
+	.range([8,24]);
 	
 var force = d3.layout.force()
-  .linkDistance(60)
-  .charge(-300)
-  .size([w,h]);
+	.linkDistance(60)
+	.charge(-300)
+	.size([w,h]);
 
 var default_node_color = "#ccc";
 //var default_node_color = "rgb(3,190,100)";
@@ -87,179 +87,156 @@ svg.style("cursor","move");
 d3.json("<%=jsonPath%>", function(error, graph) {
 
 var linkedByIndex = {};
-    graph.links.forEach(function(d) {
+graph.links.forEach(function(d) {
 	linkedByIndex[d.source + "," + d.target] = true;
-    });
+});
 
-	function isConnected(a, b) {
-        return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index] || a.index == b.index;
-    }
+function isConnected(a, b) {
+	return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index] || a.index == b.index;
+}
 
-	function hasConnections(a) {
-		for (var property in linkedByIndex) {
-				s = property.split(",");
-				if ((s[0] == a.index || s[1] == a.index) && linkedByIndex[property]) 					return true;
-		}
-	return false;
+function hasConnections(a) {
+	for (var property in linkedByIndex) {
+		s = property.split(",");
+		if ((s[0] == a.index || s[1] == a.index) && linkedByIndex[property]) return true;
 	}
+	return false;
+}
 	
-  force
-    .nodes(graph.nodes)
-    .links(graph.links)
-    .start();
+force
+	.nodes(graph.nodes)
+	.links(graph.links)
+	.start();
 
-  var link = g.selectAll(".link")
-    .data(graph.links)
-    .enter().append("line")
-    .attr("class", "link")
+var link = g.selectAll(".link")
+	.data(graph.links)
+	.enter().append("line")
+	.attr("class", "link")
 	.style("stroke-width",nominal_stroke)
 	.style("stroke", function(d) { 
-	if (isNumber(d.score) && d.score>=0) return color(d.score);
-	else return default_link_color; })
+		if (isNumber(d.score) && d.score>=0) return color(d.score);
+		else return default_link_color;
+	})
 
-
-  var node = g.selectAll(".node")
-    .data(graph.nodes)
-    .enter().append("g")
-    .attr("class", "node")
+var node = g.selectAll(".node")
+	.data(graph.nodes)
+	.enter().append("g")
+	.attr("class", "node")
+	.call(force.drag)
 	
-    .call(force.drag)
-
-	
-	node.on("dblclick.zoom", function(d) { d3.event.stopPropagation();
+node.on("dblclick.zoom", function(d) {
+	d3.event.stopPropagation();
 	var dcx = (ww/2-d.x*zoom.scale());
 	var dcy = (hh/2-d.y*zoom.scale());
 	zoom.translate([dcx,dcy]);
-	 g.attr("transform", "translate("+ dcx + "," + dcy  + ")scale(" + zoom.scale() + ")");
-	 
-	 
-	});
-	
+	g.attr("transform", "translate("+ dcx + "," + dcy  + ")scale(" + zoom.scale() + ")");
+});
+  
+var tocolor = "fill";
+var towhite = "stroke";
+if (outline) {
+	tocolor = "stroke"
+	towhite = "fill"
+}
 
-
-	
-	var tocolor = "fill";
-	var towhite = "stroke";
-	if (outline) {
-		tocolor = "stroke"
-		towhite = "fill"
-	}
-		
-	
-	
-  var circle = node.append("path")
-  
-  
-      .attr("d", d3.svg.symbol()
-        .size(function(d) { return Math.PI*Math.pow(size(d.size)||nominal_base_node_size,2); })
-        .type(function(d) { return d.type; }))
-  
+var circle = node.append("path")  
+	.attr("d", d3.svg.symbol()
+	.size(function(d) { return Math.PI*Math.pow(size(d.size)||nominal_base_node_size,2); })
+	.type(function(d) { return d.type; }))
 	.style(tocolor, function(d) { 
-	if (isNumber(d.score) && d.score>=0) return color(d.score);
-	else return default_node_color; })
-    //.attr("r", function(d) { return size(d.size)||nominal_base_node_size; })
+		if (isNumber(d.score) && d.score>=0) return color(d.score);
+		else return default_node_color; })
+	//.attr("r", function(d) { return size(d.size)||nominal_base_node_size; })
 	.style("stroke-width", nominal_stroke)
 	.style(towhite, "white");
-  	
-				
-  var text = g.selectAll(".text")
-    .data(graph.nodes)
-    .enter().append("text")
-    .attr("dy", ".35em")
+
+ var text = g.selectAll(".text")
+	.data(graph.nodes)
+	.enter().append("text")
+	.attr("dy", ".35em")
 	.style("font-size", nominal_text_size + "px")
 
-	if (text_center)
-	 text.text(function(d) { return d.id; })
-	.style("text-anchor", "middle");
-	else 
+if (text_center){
+	text.text(function(d) { return d.id; })
+		.style("text-anchor", "middle");
+}
+else {
 	text.attr("dx", function(d) {return (size(d.size)||nominal_base_node_size);})
-    .text(function(d) { return '\u2002'+d.id; });
+		.text(function(d) {
+			return d.id;
+	    	//return '\u2002'+d.id;
+   		});
+}
 
-	node.on("mouseover", function(d) {
-	set_highlight(d);
+node.on("mouseover", function(d) {
+		set_highlight(d);
 	})
-  .on("mousedown", function(d) { d3.event.stopPropagation();
-  	focus_node = d;
-	set_focus(d)
-	if (highlight_node === null) set_highlight(d)
-	
-}	).on("mouseout", function(d) {
+	.on("mousedown", function(d) {
+		d3.event.stopPropagation();
+  		focus_node = d;
+		set_focus(d)
+		if (highlight_node === null) set_highlight(d)
+	})
+	.on("mouseout", function(d) {
 		exit_highlight();
-
-}	);
-
-		d3.select(window).on("mouseup",  
-		function() {
-		if (focus_node!==null)
-		{
-			focus_node = null;
-			if (highlight_trans<1)
-			{
+	});
 	
-		circle.style("opacity", 1);
-	  text.style("opacity", 1);
-	  link.style("opacity", 1);
-	}
+d3.select(window).on("mouseup", function() {
+	if (focus_node!==null) {
+		focus_node = null;
+		if (highlight_trans<1) {
+			circle.style("opacity", 1);
+			text.style("opacity", 1);
+			link.style("opacity", 1);
 		}
-	
+	}
 	if (highlight_node === null) exit_highlight();
-		});
+});
 
-function exit_highlight()
-{
+function exit_highlight() {
 		highlight_node = null;
-	if (focus_node===null)
-	{
+	if (focus_node===null) {
 		svg.style("cursor","move");
-		if (highlight_color!="white")
-	{
-  	  circle.style(towhite, "white");
-	  text.style("font-weight", "normal");
-	  link.style("stroke", function(o) {return (isNumber(o.score) && o.score>=0)?color(o.score):default_link_color});
- }
-			
+		if (highlight_color!="white") {
+			circle.style(towhite, "white");
+			text.style("font-weight", "normal");
+			link.style("stroke", function(o) {return (isNumber(o.score) && o.score>=0)?color(o.score):default_link_color});
+		}
 	}
 }
 
-function set_focus(d)
-{	
-if (highlight_trans<1)  {
-    circle.style("opacity", function(o) {
-                return isConnected(d, o) ? 1 : highlight_trans;
-            });
-
-			text.style("opacity", function(o) {
-                return isConnected(d, o) ? 1 : highlight_trans;
-            });
-			
-            link.style("opacity", function(o) {
-                return o.source.index == d.index || o.target.index == d.index ? 1 : highlight_trans;
-            });		
+function set_focus(d) {	
+	if (highlight_trans<1) {
+    	circle.style("opacity", function(o) {
+			return isConnected(d, o) ? 1 : highlight_trans;
+		});
+		text.style("opacity", function(o) {
+			return isConnected(d, o) ? 1 : highlight_trans;
+		});
+		link.style("opacity", function(o) {
+			return o.source.index == d.index || o.target.index == d.index ? 1 : highlight_trans;
+		});		
 	}
 }
 
-
-function set_highlight(d)
-{
+function set_highlight(d) {
 	svg.style("cursor","pointer");
 	if (focus_node!==null) d = focus_node;
 	highlight_node = d;
-
-	if (highlight_color!="white")
-	{
-		  circle.style(towhite, function(o) {
-                return isConnected(d, o) ? highlight_color : "white";});
-			text.style("font-weight", function(o) {
-                return isConnected(d, o) ? "bold" : "normal";});
-            link.style("stroke", function(o) {
-		      return o.source.index == d.index || o.target.index == d.index ? highlight_color : ((isNumber(o.score) && o.score>=0)?color(o.score):default_link_color);
-
-            });
+	if (highlight_color!="white") {
+		circle.style(towhite, function(o) {
+			return isConnected(d, o) ? highlight_color : "white";
+		});
+		text.style("font-weight", function(o) {
+			return isConnected(d, o) ? "bold" : "normal";
+		});
+		link.style("stroke", function(o) {
+			return o.source.index == d.index || o.target.index == d.index ? highlight_color : ((isNumber(o.score) && o.score>=0)?color(o.score):default_link_color);
+		});
 	}
 }
- 	
- 	
-  zoom.on("zoom", function() {
+
+zoom.on("zoom", function() {
   
     var stroke = nominal_stroke;
     if (nominal_stroke*zoom.scale()>max_stroke) stroke = max_stroke/zoom.scale();
@@ -348,7 +325,6 @@ function set_highlight(d)
 					}
 					else {exit_highlight();}
 				}
-
 }	
 }
  
