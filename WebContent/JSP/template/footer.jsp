@@ -15,7 +15,9 @@
 	    });
 	    $("#ex8").on("slideStop", function(slideEvt){
 	    	console.log(slideEvt.value);
-	    	
+	    	$.get( "/Graph?dDay=" + slideEvt.value, function( data ) {
+	    		  console.log(data);
+    		});
 	    });
     </script>
     <!-- Latest compiled and minified JavaScript -->
