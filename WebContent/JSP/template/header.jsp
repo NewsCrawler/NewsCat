@@ -17,7 +17,7 @@
     <meta property="me2:image" content="http://decha.p316.net/000.png">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:creator" content="누군">
+    <meta name="twitter:creator" content="누군가">
     <meta name="twitter:site" content="뉴스 크롤러">
     <meta name="twitter:title" content="뉴스 크롤러">
     <meta name="twitter:image" content="http://news.p316.net/res/img/news.jpg">
@@ -56,9 +56,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="Semantic">의미망분석</a></li>
+            <li ><a href="/Semantic">의미망분석</a></li>
             <li ><a href="/Title">수집기사</a></li>
-            <li ><a href="/About">개발기록</a></li>
             <li ><a href="https://github.com/NewsCrawler/" target="blank">GitHub</a></li>
           </ul>
         </div><!--/.nav-collapse -->
