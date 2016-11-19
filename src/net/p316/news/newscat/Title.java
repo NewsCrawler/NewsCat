@@ -1,10 +1,7 @@
 package net.p316.news.newscat;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -35,7 +32,7 @@ public class Title extends HttpServlet
         super();
         // TODO Auto-generated constructor stub
     }
-
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -44,13 +41,14 @@ public class Title extends HttpServlet
 		// TODO Auto-generated method stub
 		MySQLConnector conn = new MySQLConnector();
 		ArrayList<NcTitle> data = new ArrayList<NcTitle>();
-		int totalpagecnt = conn.get_Recordcnt() / PAGE_RECORDCNT + 1;
-		//전체 페이지 갯수
 		int crtpage = 1;
 		String sdate = null;
 		//시작 날짜
 		String edate = null;
 		//끝 날짜
+		String keyword = null;
+		//검색어
+		
 		if(request.getParameter("page") != null)
 		{
 			crtpage = Integer.parseInt(request.getParameter("page"));
@@ -66,11 +64,18 @@ public class Title extends HttpServlet
 			edate = request.getParameter("edate");
 		}
 		
-		String test = request.getParameter("test");
-		data = conn.get_Values(crtpage, sdate, edate);
+		if(request.getParameter("keyword") != null)
+		{
+			keyword = request.getParameter("keyword");
+		}
+		int totalrecordcnt = conn.get_Recordcnt(sdate, edate, keyword);
+		int totalpagecnt = totalrecordcnt / PAGE_RECORDCNT + 1;
+		//전체 페이지 갯수
+		data = conn.get_Values(crtpage, sdate, edate, keyword);
 		conn.close();
 		request.setAttribute("data", data);
 		request.setAttribute("page_recordcnt", PAGE_RECORDCNT);
+		request.setAttribute("totalrecordcnt", totalrecordcnt);
 		request.setAttribute("totalpagecnt", totalpagecnt);
 		request.setAttribute("page_pagecnt", PAGE_PAGECNT);
 		request.setAttribute("crtpage", crtpage);
