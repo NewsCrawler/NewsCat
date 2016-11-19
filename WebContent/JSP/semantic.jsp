@@ -7,7 +7,15 @@ String jsonPath = "/Graph";
 %>
 
 <div class="container">
-	<div id="graph">
+	<div class="col-md-12">
+		<div class="row" style="margin-top:40px; margin-bottom:40px;">
+			<strong style="margin-right:10px;">D-Day :</strong>
+			<input id="ex8" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="27" data-slider-step="1" data-slider-value="0"/>
+		</div>
+		
+		<div class="row">
+			<div id="graph"></div>
+		</div>
 	</div>
 </div>
 
