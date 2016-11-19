@@ -45,6 +45,18 @@ public class Graph extends HttpServlet {
 		Date sdate = Date.valueOf("2016-10-25");
 		Date edate = Date.valueOf("2016-11-13");
 		
+		int addDay = 0;
+		// TimeStamp로 바꿔야함
+		if(dDay <= 6){
+			addDay = 25;
+			addDay += dDay;
+			edate = Date.valueOf("2016-10-" + Integer.toString(addDay));
+		}else{
+			addDay = 0;
+			addDay += dDay;
+			edate = Date.valueOf("2016-11-" + Integer.toString(addDay));
+		}
+		
 		// get DB
 		GraphDAO graphDAO = new GraphDAO();
 		ArrayList<GraphDTO> gto = graphDAO.getTable(sdate, edate);
@@ -138,16 +150,17 @@ public class Graph extends HttpServlet {
 		
 		ArrayList<JNode> nodes = new ArrayList<JNode>();
 		nodes.add(new JNode(60,0.4,"null"));
-		for(int i=0; i<size; i++){
-			if(usedID[i]){
+		for(int i=1; i<size; i++){
+			
 				// 노드의 크기를 평탄화 시키려면 x^2를 써야함
 				int nodeSize = 20;
 				if(cntID[i] > 100) nodeSize += 20;
 				if(cntID[i] > 500) nodeSize += 20;
 				if(cntID[i] > 1000) nodeSize += 20;
 				if(cntID[i] > 2000) nodeSize += 20;
+				if(!usedID[i]) nodeSize = 0;
 				nodes.add(new JNode(nodeSize, wordCate[i], wordID[i]));
-			}
+
 		}
 		
 		json += "\"links\" :" + new Gson().toJson(links) + ", ";
