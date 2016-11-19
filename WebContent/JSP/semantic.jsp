@@ -123,6 +123,10 @@ var node = g.selectAll(".node")
 	.enter().append("g")
 	.attr("class", "node")
 	.call(force.drag)
+
+node.on("dblclick",function(d){
+	console.log(d.id);
+});
 	
 node.on("dblclick.zoom", function(d) {
 	d3.event.stopPropagation();
@@ -367,7 +371,6 @@ function vis_by_link_score(score)
 function isNumber(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }	
-
 
 </script>
 
