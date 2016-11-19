@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="template/header.jsp" %>
 <%@ page import = "java.util.*"%>
+<%@ page import = "java.text.SimpleDateFormat" %>
 <%@ page import = "net.p316.news.newscat.data.NcTitle"%>
 <%
 ArrayList<NcTitle> data = (ArrayList<NcTitle>) request.getAttribute("data");
@@ -12,8 +13,11 @@ int page_recordcnt = Integer.parseInt(request.getAttribute("page_recordcnt").toS
 int crtpage = Integer.parseInt(request.getAttribute("crtpage").toString());
 String psdate = request.getParameter("sdate");
 String pedate = request.getParameter("edate");
-String keyword = request.getParameter("keyword");
-String sdate = "2016-11-09";
+String keyword = null;
+if(request.getParameterMap().containsKey("keyword")) keyword = request.getParameter("keyword");
+String nowPage = null;
+if(request.getParameterMap().containsKey("page")) nowPage = request.getParameter("page");
+String sdate = "2016-10-25";
 String edate = "2016-11-09";
 if(psdate != null)
 {
@@ -28,39 +32,40 @@ if(pedate != null)
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			
-			<div class="col-xs-12 col-md-6 col-md-offset-3">
+			<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 				<h1>뉴스크롤러 기사 검색</h1>
 				<form>
 					<div class="form-group">
 						<label for="datepicker">날짜</label>
 						<div class="input-daterange input-group" id="datepicker">
-						    <input type="text" class="input-sm form-control" name="sdate" value="sdate" />
+						    <input type="text" class="input-sm form-control" name="sdate" value="<%=sdate%>" />
 						    <span class="input-group-addon">to</span>
-						    <input type="text" class="input-sm form-control" name="edate" value="edate" />
+						    <input type="text" class="input-sm form-control" name="edate" value="<%=edate %>" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="keyword">키워드</label>
-						<input type="text" class="form-control" id="keyword" name="keyword" placeholder="키워드 입력" value="keyword">
+						<input type="text" class="form-control" id="keyword" name="keyword" placeholder="키워드 입력" value="<% if(keyword != null) { %><%=keyword%> <% } %>">
 					</div>
 					<button type="submit" class="btn btn-primary btn-block">검색</button>
 				</form>
 			</div>
 		</div>
+	</div>
 	
+	<div class="row">
 		<div class="col-md-12" style="margin-top:50px;">
 			<h3>
 			<%=sdate%>에서 <%=edate%>까지의
 			<%
-			if(keyword != null && keyword.length() != 0) 
+			if(keyword != null) 
 			{
 			%>
-			<%=keyword%>에 대한
+			"<%=keyword%>"에 대한
 			<%
 			}
 			%>
-			검색 목록
+			검색 목록<% if(nowPage != null) { %>의 <%=nowPage%> 페이지<% } %>
 			</h3>
 		
 			<table class="table table-striped">
@@ -85,8 +90,12 @@ if(pedate != null)
 						out.println(data.get(i).get_title());
 				   		%>
 						</a></td>
-						<td></td>
-						<td></td>
+						<td><%=data.get(i).get_company()%></td>
+						<td>
+						<%
+						data.get(i).get_date();
+						 %>
+						</td>
 					</tr>
 				<%
 				if(totalrecordcnt == recordcnt++)
@@ -127,7 +136,17 @@ if(pedate != null)
 							endindex = ((crtpage-1)/page_pagecnt)*page_pagecnt+page_pagecnt;
 						}
 					%>
-						<li><a href="?page=<%=i+1%>"><%=i+1%></a></li>
+						<li><a href="?page=<%=i+1%>
+							&sdate=<%=sdate%>
+							&edate=<%=edate%>
+							<%
+							if(keyword != null) {
+							%>
+								&keyword=<%=keyword%>
+							<%
+							}
+							%>
+							"><%=i+1%></a></li>
 					<%
 					}
 					%>
@@ -137,7 +156,17 @@ if(pedate != null)
 					{
 					%>
 						<li>
-							<a href="?page=<%=crtpage/page_pagecnt*page_pagecnt+6%>" aria-label="Next">
+							<a href="?page=<%=crtpage/page_pagecnt*page_pagecnt+6%>
+								&sdate=<%=sdate%>
+								&edate=<%=edate%>
+								<%
+								if(keyword != null) {
+								%>
+									&keyword=<%=keyword%>
+								<%
+								}
+								%>
+								" aria-label="Next">
 								<span aria-hidden="true">&raquo;</span>
 							</a>
 						</li>
