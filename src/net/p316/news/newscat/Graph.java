@@ -78,6 +78,34 @@ public class Graph extends HttpServlet {
 		}
 		
 		// create Matrix
+		int w = 0;
+		int maxNodes = 0;
+		for(int i=1; i<gto.size(); i++){
+			usedID[gto.get(i).getIdx_word()] = true;
+			if(gto.get(i-1).getIdx_title() != gto.get(i).getIdx_title()){
+				for(int j=w; j<i; j++){
+					for(int k=w; k<i; k++){
+						if(j == k) continue;
+						if(gto.get(j).getIdx_word() == gto.get(k).getIdx_word()) continue;
+						matrix[gto.get(j).getIdx_word()][gto.get(k).getIdx_word()]++;
+						matrix[gto.get(k).getIdx_word()][gto.get(j).getIdx_word()]++;
+						if(maxNodes < matrix[gto.get(k).getIdx_word()][gto.get(j).getIdx_word()])
+							maxNodes = matrix[gto.get(k).getIdx_word()][gto.get(j).getIdx_word()];
+					}
+				}
+				w = i;
+			}
+		}
+		for(int j=w; j<gto.size(); j++){
+			for(int k=w; k<gto.size(); k++){
+				if(j == k) continue;
+				if(gto.get(j).getIdx_word() == gto.get(k).getIdx_word()) continue;
+				matrix[gto.get(j).getIdx_word()][gto.get(k).getIdx_word()]++;
+				matrix[gto.get(k).getIdx_word()][gto.get(j).getIdx_word()]++;
+				if(maxNodes < matrix[gto.get(k).getIdx_word()][gto.get(j).getIdx_word()])
+					maxNodes = matrix[gto.get(k).getIdx_word()][gto.get(j).getIdx_word()];
+			}
+		}
 
 		// make JSON
 		response.setContentType("application/json");
