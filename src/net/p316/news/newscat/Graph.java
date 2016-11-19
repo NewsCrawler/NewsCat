@@ -47,13 +47,13 @@ public class Graph extends HttpServlet {
 		
 		int addDay = 0;
 		// TimeStamp로 바꿔야함
-		if(dDay <= 6){
-			addDay = 25;
+		if(dDay < 6){
+			addDay = 26;
 			addDay += dDay;
 			edate = Date.valueOf("2016-10-" + Integer.toString(addDay));
 		}else{
 			addDay = 0;
-			addDay += dDay;
+			addDay += dDay-5;
 			edate = Date.valueOf("2016-11-" + Integer.toString(addDay));
 		}
 		
@@ -77,17 +77,21 @@ public class Graph extends HttpServlet {
 			wo = itw.next();
 			
 			// 카테고리별 색상 넣는 부분
-			// 0.0x
+			// 0.0x else
 			// 0.1x
-			// 0.2x
-			// 0.3x
-			// 0.4x
+			// 0.2x 동사
+			// 0.3x 
+			// 0.4x 지역
 			// 0.5x
-			// 0.6x
+			// 0.6x 명사
 			// 0.7x
-			// 0.8x
-			// 0.9x
-			double color = 0.3;
+			// 0.8x 고유명사
+			// 0.9x 
+			double color = 0.0;
+			if(wo.getCate1().equals("동사")) color = 0.2;
+			if(wo.getCate1().equals("지역")) color = 0.4;
+			if(wo.getCate1().equals("명사")) color = 0.6;
+			if(wo.getCate1().equals("고유명사")) color = 0.8;
 			
 			wordCate[wo.getIdx()] = color;
 			wordID[wo.getIdx()] = wo.getWord();
@@ -153,12 +157,17 @@ public class Graph extends HttpServlet {
 		for(int i=1; i<size; i++){
 			
 				// 노드의 크기를 평탄화 시키려면 x^2를 써야함
-				int nodeSize = 20;
-				if(cntID[i] > 100) nodeSize += 20;
-				if(cntID[i] > 500) nodeSize += 20;
-				if(cntID[i] > 1000) nodeSize += 20;
-				if(cntID[i] > 2000) nodeSize += 20;
-				if(!usedID[i]) nodeSize = 0;
+				int nodeSize = 10;
+				if(cntID[i] > 10) nodeSize += 10;
+				if(cntID[i] > 20) nodeSize += 10;
+				if(cntID[i] > 30) nodeSize += 10;
+				if(cntID[i] > 50) nodeSize += 10;
+				if(cntID[i] > 100) nodeSize += 10;
+				if(cntID[i] > 150) nodeSize += 10;
+				if(cntID[i] > 500) nodeSize += 10;
+				if(cntID[i] > 1000) nodeSize += 10;
+				if(cntID[i] > 2000) nodeSize += 10;
+				if(cntID[i] == 0) nodeSize = 1;
 				nodes.add(new JNode(nodeSize, wordCate[i], wordID[i]));
 
 		}
