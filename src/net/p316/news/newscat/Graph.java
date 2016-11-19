@@ -1,7 +1,9 @@
 package net.p316.news.newscat;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import net.p316.news.newscat.DAO.GraphDAO;
+import net.p316.news.newscat.DAO.WordTableDAO;
+import net.p316.news.newscat.DTO.GraphDTO;
+import net.p316.news.newscat.DTO.WordTableDTO;
 import net.p316.news.newscat.util.graph.JLink;
 import net.p316.news.newscat.util.graph.JNode;
 /**
@@ -32,7 +38,25 @@ public class Graph extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// check request getParam
+		Date sdate = Date.valueOf("2016-10-25");
+		Date edate = Date.valueOf("2016-11-13");
+		
+		// get DB
+		GraphDAO graphDAO = new GraphDAO();
+		ArrayList<GraphDTO> gto = graphDAO.getTable(sdate, edate);
+		WordTableDAO wordTableDAO = new WordTableDAO();
+		ArrayList<WordTableDTO> wto = wordTableDAO.getWordTable();
+		
+		// run Algorithm
+		Iterator<GraphDTO> it = gto.iterator();
+		while(it.hasNext()){
+			// gto에서 동일 idx_title 내에 있는 idx_word를 매트릭스 내에서 서로 +1시켜준다.
+			// 동시에 값이 있는 wordTable은 true, node로 만든
+			// 여기서 만든 매트릭스는 JSON을 만들 때 링크로 사용한다.
+		}
+
+		// make JSON
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		

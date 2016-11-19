@@ -48,6 +48,10 @@ public class MySQLConnector
 		}
 	}
 	
+	public Connection getConn(){
+		return conn; 
+	}
+	
 	public String make_Sql(String sql, String sdate, String edate, String keyword)
 	{
 		if(keyword==null)
