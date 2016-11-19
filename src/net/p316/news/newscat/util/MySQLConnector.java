@@ -48,25 +48,87 @@ public class MySQLConnector
 		}
 	}
 	
-	public int get_Recordcnt() 
+	public String make_Sql(String sql, String sdate, String edate, String keyword)
 	{
-		int rowcnt = 0;
+		if(keyword==null)
+		{
+			if(sdate==null && edate==null)
+			{
+				sql += " WHERE `date` BETWEEN '2016-11-09 00:00:00' AND '2016-11-09 23:59:59'";
+			}
+			else
+			{
+				if(sdate.length()==0 && edate.length()==0)
+				{
+					sql += " WHERE `date` BETWEEN '2016-11-09 00:00:00' AND '2016-11-09 23:59:59'";
+				}
+				else {
+					sql += " WHERE `date` BETWEEN '" +sdate+ " 00:00:00' AND '" + edate + " 23:59:59'";
+				}
+			}
+		}
+		else
+		{
+			if(keyword.length()==0)
+			{
+				if(sdate==null && edate==null)
+				{
+					sql += " WHERE `date` BETWEEN '2016-11-09 00:00:00' AND '2016-11-09 23:59:59'";
+				}
+				else
+				{
+					if(sdate.length()==0 && edate.length()==0)
+					{
+						sql += " WHERE `date` BETWEEN '2016-11-09 00:00:00' AND '2016-11-09 23:59:59'";
+					}
+					else {
+						sql += " WHERE `date` BETWEEN '" +sdate+ " 00:00:00' AND '" + edate + " 23:59:59'";
+					}
+				}
+			}
+			else
+			{
+				sql += " WHERE `title` LIKE '%" + keyword + "%'";
+				if(sdate==null && edate==null)
+				{
+					sql += " AND `date` BETWEEN '2016-11-09 00:00:00' AND '2016-11-09 23:59:59'";
+				}
+				else
+				{
+					if(sdate.length()==0 && edate.length()==0)
+					{
+						sql += " AND `date` BETWEEN '2016-11-09 00:00:00' AND '2016-11-09 23:59:59'";
+					}
+					else {
+						sql += " AND `date` BETWEEN '" +sdate+ " 00:00:00' AND '" + edate + " 23:59:59'";
+					}
+				}
+			}
+		}
+		return sql;
+	}
+	
+	public int get_Recordcnt(String sdate, String edate, String keyword) 
+	{
+		int recordcnt = 0;
 		Statement stmt = null;
 		ResultSet rs = null;
+		String sql = "SELECT COUNT(*) FROM `nc_title`";
 		try 
 		{
 			Class.forName("com.mysql.jdbc.Driver");
-			String sql = "SELECT COUNT(*) FROM `nc_title`";
+			sql = make_Sql(sql, sdate, edate, keyword);
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			if(rs.next()) 
 			{
-				rowcnt = rs.getInt(1);
+				recordcnt = rs.getInt(1);
 			}
 		}
 		catch (SQLException ex)
 		{
 			System.out.println("SQLException: " + ex.getMessage());
+			System.out.println("here 1");
 		} 
 		catch (Exception ex)
 		{
@@ -92,23 +154,23 @@ public class MySQLConnector
 	        	System.out.println("SQLException: " + ex.getMessage());
 	        }
 		}
+		System.out.println("sql in get_recordcnt : " + sql);
+		System.out.println("recordcnt : " + recordcnt);
 		
-		return rowcnt;
+		return recordcnt;
 	}
 	
-	public ArrayList<NcTitle> get_Values(int crtpage, String sdate, String edate) 
+	public ArrayList<NcTitle> get_Values(int crtpage, String sdate, String edate, String keyword) 
 	{
 		ArrayList<NcTitle> data = new ArrayList<NcTitle>();
 		Statement stmt = null;
 		ResultSet rs = null;
-		String sql = null;
+		String sql = "SELECT * FROM `nc_title`";
 		try 
 		{
 			Class.forName("com.mysql.jdbc.Driver");
-			if(sdate == null || edate == null)
-				sql = "SELECT * FROM `nc_title` LIMIT " + (crtpage - 1) * 25 + ", 25";
-			else
-				sql = "SELECT * FROM `nc_title` WHERE `date` BETWEEN '" + sdate + "' AND '" + edate + "' LIMIT " + (crtpage - 1) * 25 + ", 25";
+			sql = make_Sql(sql, sdate, edate, keyword);
+			sql += " LIMIT " + (crtpage - 1) * 25 + ", 25";
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) 
@@ -151,6 +213,7 @@ public class MySQLConnector
 	        		System.out.println("SQLException: " + ex.getMessage());
 	        }
 		}
+		System.out.println("sql in get_values : " + sql);
 		return data;
 	}
 
