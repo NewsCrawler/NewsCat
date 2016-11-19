@@ -31,7 +31,8 @@ public class GraphDAO {
 				+ " on a.idx = b.idx_title"
 				+ " inner join nc_word_table c"
 				+ " on b.idx_word = c.idx"
-				+ " WHERE a.date BETWEEN ? AND ?");
+				+ " WHERE a.date BETWEEN ? AND ?"
+				+ " ORDER BY `b`.`idx_title` ASC");
 		
 		try{
 			psmt = conn.getConn().prepareStatement(sql.toString());

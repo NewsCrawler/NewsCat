@@ -49,12 +49,35 @@ public class Graph extends HttpServlet {
 		ArrayList<WordTableDTO> wto = wordTableDAO.getWordTable();
 		
 		// run Algorithm
-		Iterator<GraphDTO> it = gto.iterator();
-		while(it.hasNext()){
-			// gto에서 동일 idx_title 내에 있는 idx_word를 매트릭스 내에서 서로 +1시켜준다.
-			// 동시에 값이 있는 wordTable은 true, node로 만든
-			// 여기서 만든 매트릭스는 JSON을 만들 때 링크로 사용한다.
+		int size = 400;
+		int[][] matrix = new int[size][size];
+		String[] wordID = new String[size];
+		double[] wordCate = new double[size];
+		boolean[] usedID = new boolean[size];
+		
+		Iterator<WordTableDTO> itw = wto.iterator();
+		WordTableDTO wo = null;
+		while(itw.hasNext()){
+			wo = itw.next();
+			
+			// 카테고리별 색상 넣는 부분
+			// 0.0x
+			// 0.1x
+			// 0.2x
+			// 0.3x
+			// 0.4x
+			// 0.5x
+			// 0.6x
+			// 0.7x
+			// 0.8x
+			// 0.9x
+			double color = 0.3;
+			
+			wordCate[wo.getIdx()] = color;
+			wordID[wo.getIdx()] = wo.getWord();
 		}
+		
+		// create Matrix
 
 		// make JSON
 		response.setContentType("application/json");
