@@ -67,7 +67,7 @@ public class Graph extends HttpServlet {
 		
 		// run Algorithm
 		int size = 400;
-		int cutLine = 5;
+		int cutLine = 10;
 		int[][] matrix = new int[size][size];
 		String[] wordID = new String[size];
 		double[] wordCate = new double[size];
@@ -193,12 +193,13 @@ public class Graph extends HttpServlet {
 				if(vCntID > 5) nodeSize += 10;
 				if(vCntID > 10) nodeSize += 10;
 				if(vCntID > 20) nodeSize += 10;
-				if(vCntID > 30) nodeSize += 10;
 				if(vCntID > 50) nodeSize += 10;
 				if(vCntID > 100) nodeSize += 10;
 				if(vCntID > 250) nodeSize += 10;
 				if(vCntID > 500) nodeSize += 10;
 				if(vCntID > 1000) nodeSize += 10;
+				if(vCntID > 3000) nodeSize += 20;
+				if(vCntID > 5000) nodeSize += 20;
 				nodes.add(new JNode(nodeSize, wordCate[newMap.get(i)], wordID[newMap.get(i)]));
 		}
 		

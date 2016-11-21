@@ -74,6 +74,10 @@ var size = d3.scale.pow().exponent(1)
 var force = d3.layout.force()
   .linkDistance(200)
   .charge(-600)
+  .linkStrength(0.1)
+  .gravity(0.1)
+  .theta(0.8)
+  .alpha(0.1)
   .friction(0.9)
   .size([w,h]);
 
