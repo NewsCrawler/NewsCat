@@ -169,7 +169,7 @@ public class MySQLConnector
 		ArrayList<NcTitle> data = new ArrayList<NcTitle>();
 		Statement stmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM `nc_title_1113`";
+		String sql = "SELECT * FROM `nc_title`";
 		try 
 		{
 			Class.forName("com.mysql.jdbc.Driver");
