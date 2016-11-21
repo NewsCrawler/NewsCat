@@ -159,8 +159,9 @@ public class Graph extends HttpServlet {
 		for(int i=0; i<newMap.size(); i++){
 			int oi = newMap.get(i);
 			for(int oj=0; oj<size; oj++){
-				if(matrix[oi][oj] > cutLine){
+				if(matrix[oi][oj] > 0){
 					int j = newMap.indexOf(oj);
+					if(j < 0) continue;
 					newMatrics[i][j] = matrix[oi][oj];
 				}
 			}
@@ -189,15 +190,15 @@ public class Graph extends HttpServlet {
 				// 노드의 크기를 평탄화 시키려면 x^2를 써야함
 				int nodeSize = 10;
 				int vCntID = cntID[newMap.get(i)];
+				if(vCntID > 5) nodeSize += 10;
 				if(vCntID > 10) nodeSize += 10;
 				if(vCntID > 20) nodeSize += 10;
 				if(vCntID > 30) nodeSize += 10;
 				if(vCntID > 50) nodeSize += 10;
 				if(vCntID > 100) nodeSize += 10;
-				if(vCntID > 150) nodeSize += 10;
+				if(vCntID > 250) nodeSize += 10;
 				if(vCntID > 500) nodeSize += 10;
 				if(vCntID > 1000) nodeSize += 10;
-				if(vCntID > 2000) nodeSize += 10;
 				nodes.add(new JNode(nodeSize, wordCate[newMap.get(i)], wordID[newMap.get(i)]));
 		}
 		

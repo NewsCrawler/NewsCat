@@ -6,7 +6,7 @@
 
 <div class="container">
 	<div class="col-md-12">
-		<div class="row" style="margin-top:40px; margin-bottom:40px;">
+		<div class="row" style="margin-top:30px; margin-bottom:30px;">
 			<strong style="margin-right:10px;">D-Day +</strong>
 			<input id="ex8" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="27" data-slider-step="1" data-slider-value="0"/>
 		</div>
@@ -44,7 +44,7 @@ var keyc = true, keys = true, keyt = true, keyr = true, keyx = true, keyd = true
 
 var focus_node = null, highlight_node = null;
 
-var text_center = false;
+var text_center = true;
 var outline = false;
 
 var min_score = 0;
@@ -52,7 +52,7 @@ var max_score = 1;
 
 var color = d3.scale.linear()
   .domain([min_score, (min_score+max_score)/2, max_score])
-  .range(["lime", "yellow", "red"]);
+  .range([d3.rgb(0, 173, 174), d3.rgb(134, 76, 148), d3.rgb(229, 230, 48)]);
 
 var highlight_color = "blue";
 var highlight_trans = 0.1;
@@ -62,8 +62,9 @@ var size = d3.scale.pow().exponent(1)
   .range([8,24]);
   
 var force = d3.layout.force()
-  .linkDistance(60)
-  .charge(-300)
+  .linkDistance(200)
+  .charge(-600)
+  .friction(0.9)
   .size([w,h]);
 
 var default_node_color = "#ccc";
@@ -370,5 +371,11 @@ function isNumber(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
 </script>
+
+<style>
+body{
+	overflow-y: hidden;
+}
+</style>
 
 <%@ include file="template/footer.jsp" %>
