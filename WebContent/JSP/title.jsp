@@ -79,9 +79,14 @@ if(pedate != null)
 				</thead>
 				<tbody>
 				<%
-				int recordcnt = 0;
+				int recordcnt = (crtpage-1) * page_recordcnt;
 				for(int i=0; i<page_recordcnt; i++) 
 				{
+					recordcnt++;
+					if(totalrecordcnt == recordcnt)
+					{
+						break;
+					}
 				%>
 					<tr>
 						<td></td>
@@ -98,10 +103,6 @@ if(pedate != null)
 						</td>
 					</tr>
 				<%
-				if(totalrecordcnt == recordcnt++)
-				{
-					break;
-				}
 			   	}
 			  	%>
 				</tbody>
@@ -115,7 +116,7 @@ if(pedate != null)
 					{
 					%>
 						<li>
-						  <a href="?page=<%=crtpage/page_pagecnt*page_pagecnt%>" aria-label="Previous">
+						  <a href="?page=<%=(crtpage-1)/page_pagecnt*page_pagecnt%>" aria-label="Previous">
 						    <span aria-hidden="true">&laquo;</span>
 						  </a>
 						</li>
@@ -124,16 +125,16 @@ if(pedate != null)
 					%>
 					
 					<%
-					int endindex = ((crtpage-1)/page_pagecnt)*page_pagecnt+page_pagecnt;
-					for(int i=((crtpage-1)/page_pagecnt)*page_pagecnt; i<endindex; i++)
+					int pendindex = ((crtpage-1)/page_pagecnt)*page_pagecnt+page_pagecnt;
+					for(int i=((crtpage-1)/page_pagecnt)*page_pagecnt; i<pendindex; i++)
 					{
 						if((totalpagecnt-1)/page_pagecnt == (crtpage-1)/page_pagecnt)
 						{
-							endindex = totalpagecnt - (totalpagecnt-1)/page_pagecnt*page_pagecnt;
+							pendindex = totalpagecnt;
 						}
 						else
 						{
-							endindex = ((crtpage-1)/page_pagecnt)*page_pagecnt+page_pagecnt;
+							pendindex = ((crtpage-1)/page_pagecnt)*page_pagecnt+page_pagecnt;
 						}
 					%>
 						<li><a href="?page=<%=i+1%>
@@ -156,7 +157,7 @@ if(pedate != null)
 					{
 					%>
 						<li>
-							<a href="?page=<%=crtpage/page_pagecnt*page_pagecnt+6%>
+							<a href="?page=<%=(crtpage-1)/page_pagecnt*page_pagecnt+6%>
 								&sdate=<%=sdate%>
 								&edate=<%=edate%>
 								<%
