@@ -5,7 +5,7 @@
 <% String jsonPath = "/Graph?dDay=0"; %>
 
 <div class="container">
-	<div class="col-md-12">
+	<div class="col-xs-12 col-sm-10 col-sm-offset-1">
 		<div class="row" style="margin-top:30px; margin-bottom:30px;">
 			<strong style="margin-right:10px;">D-Day +</strong>
 			<input id="ex8" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="27" data-slider-step="1" data-slider-value="0"/>
@@ -19,9 +19,17 @@
 <style>
 #graph{
 	border: 1px solid black;
-	height: 480px;
+	height: 280px;
 	margin: 0px;
 	overflow: hidden;
+}
+html body {
+     overflow:hidden;
+}
+@media (min-width: 768px) {
+	#graph{
+		height: 560px;
+	}
 }
 text {
 	font-family: sans-serif;
@@ -33,6 +41,8 @@ text {
 <script>
 //var w = window.innerWidth;
 //var h = window.innerHeight;
+document.addEventListener('ontouchstart', function(e) {e.preventDefault()}, false);
+document.addEventListener('ontouchmove', function(e) {e.preventDefault()}, false);
 
 var ww = document.getElementById('graph').offsetWidth;
 var hh = document.getElementById('graph').offsetHeight;
@@ -371,11 +381,5 @@ function isNumber(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
 </script>
-
-<style>
-body{
-	overflow-y: hidden;
-}
-</style>
 
 <%@ include file="template/footer.jsp" %>
