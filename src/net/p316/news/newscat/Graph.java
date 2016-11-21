@@ -3,6 +3,8 @@ package net.p316.news.newscat;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 
 import javax.servlet.ServletException;
@@ -65,6 +67,7 @@ public class Graph extends HttpServlet {
 		
 		// run Algorithm
 		int size = 400;
+		int cutLine = 5;
 		int[][] matrix = new int[size][size];
 		String[] wordID = new String[size];
 		double[] wordCate = new double[size];
@@ -134,6 +137,34 @@ public class Graph extends HttpServlet {
 					maxNodes = cntID[gto.get(k).getIdx_word()];
 			}
 		}
+		
+		// normalize
+		ArrayList<Integer> newMap = new ArrayList<Integer>();
+		int[][] newMatrics = new int[size][size];
+		
+		// Map을 새로 만듬
+		for(int i=1; i<size; i++){
+			if(usedID[i]){
+				if(cntID[i] > cutLine){
+					newMap.add(i);
+				}
+			}
+		}
+		
+		// 상위 n개만 남기기
+		//Collections.sort(newMap);
+		//newMap = new ArrayList<Integer>(newMap.subList(0, 50));
+		
+		// 행렬 축소
+		for(int i=0; i<newMap.size(); i++){
+			int oi = newMap.get(i);
+			for(int oj=0; oj<size; oj++){
+				if(matrix[oi][oj] > cutLine){
+					int j = newMap.indexOf(oj);
+					newMatrics[i][j] = matrix[oi][oj];
+				}
+			}
+		}
 
 		// make JSON
 		response.setContentType("application/json");
@@ -144,32 +175,30 @@ public class Graph extends HttpServlet {
 		String json = "{ \"graph\" : [], ";
 		
 		ArrayList<JLink> links = new ArrayList<JLink>();
-		for(int i=1; i<size; i++){
-			for(int j=1; j<i; j++){
-				if(matrix[i][j] > 0) {
+		for(int i=0; i<newMap.size(); i++){
+			for(int j=0; j<i; j++){
+				if(newMatrics[i][j] > 0) {
 					links.add(new JLink(i, j));
 				}
 			}
 		}
 		
 		ArrayList<JNode> nodes = new ArrayList<JNode>();
-		nodes.add(new JNode(60,0.4,"null"));
-		for(int i=1; i<size; i++){
+		for(int i=0; i<newMap.size(); i++){
 			
 				// 노드의 크기를 평탄화 시키려면 x^2를 써야함
 				int nodeSize = 10;
-				if(cntID[i] > 10) nodeSize += 10;
-				if(cntID[i] > 20) nodeSize += 10;
-				if(cntID[i] > 30) nodeSize += 10;
-				if(cntID[i] > 50) nodeSize += 10;
-				if(cntID[i] > 100) nodeSize += 10;
-				if(cntID[i] > 150) nodeSize += 10;
-				if(cntID[i] > 500) nodeSize += 10;
-				if(cntID[i] > 1000) nodeSize += 10;
-				if(cntID[i] > 2000) nodeSize += 10;
-				if(cntID[i] == 0) nodeSize = 1;
-				nodes.add(new JNode(nodeSize, wordCate[i], wordID[i]));
-
+				int vCntID = cntID[newMap.get(i)];
+				if(vCntID > 10) nodeSize += 10;
+				if(vCntID > 20) nodeSize += 10;
+				if(vCntID > 30) nodeSize += 10;
+				if(vCntID > 50) nodeSize += 10;
+				if(vCntID > 100) nodeSize += 10;
+				if(vCntID > 150) nodeSize += 10;
+				if(vCntID > 500) nodeSize += 10;
+				if(vCntID > 1000) nodeSize += 10;
+				if(vCntID > 2000) nodeSize += 10;
+				nodes.add(new JNode(nodeSize, wordCate[newMap.get(i)], wordID[newMap.get(i)]));
 		}
 		
 		json += "\"links\" :" + new Gson().toJson(links) + ", ";
@@ -186,5 +215,4 @@ public class Graph extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }
