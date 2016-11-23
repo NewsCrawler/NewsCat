@@ -151,18 +151,37 @@ public class Graph extends HttpServlet {
 			}
 		}
 		
+		// cntID가 큰 순으로 노드 순서를 정렬한다.
+		
+		
+		// 각 노드에서 자기와 연결된 작은 노드를 3개 노드를 추가한다.
+		
+		
 		// 상위 n개만 남기기
 		//Collections.sort(newMap);
 		//newMap = new ArrayList<Integer>(newMap.subList(0, 50));
 		
-		// 행렬 축소
+		// 행렬 그래프 축소
 		for(int i=0; i<newMap.size(); i++){
 			int oi = newMap.get(i);
 			for(int oj=0; oj<size; oj++){
 				if(matrix[oi][oj] > 0){
 					int j = newMap.indexOf(oj);
-					if(j < 0) continue;
-					newMatrics[i][j] = matrix[oi][oj];
+					if(j >= 0){
+						// matrix[oi][oj]에서 3번째까지 크거나, 100개 이상 있는 경우
+						boolean flag = false;
+						if(matrix[oi][oj] > 1000) flag = true;
+						if(!flag){
+							// Dynamic, 
+							int maxCnt = 0;
+							for(int l=0; l<size; l++){
+								if(oj == l) continue;
+								if(matrix[oi][oj] < matrix[oi][l]) maxCnt++;
+							}
+							if(maxCnt < 2) flag = true;
+						}
+						if(flag) newMatrics[i][j] = matrix[oi][oj];
+					}
 				}
 			}
 		}

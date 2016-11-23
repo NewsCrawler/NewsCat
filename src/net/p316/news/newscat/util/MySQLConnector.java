@@ -85,7 +85,7 @@ public class MySQLConnector
 		int recordcnt = 0;
 		Statement stmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT COUNT(*) FROM `nc_title`";
+		String sql = "SELECT COUNT(*) FROM `nc_title_1120`";
 		try 
 		{
 			Class.forName("com.mysql.jdbc.Driver");
