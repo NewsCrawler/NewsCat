@@ -15,10 +15,11 @@ String psdate = request.getParameter("sdate");
 String pedate = request.getParameter("edate");
 String keyword = null;
 if(request.getParameterMap().containsKey("keyword")) keyword = request.getParameter("keyword");
+if(keyword == "") keyword = null;
 String nowPage = null;
 if(request.getParameterMap().containsKey("page")) nowPage = request.getParameter("page");
 String sdate = "2016-10-25";
-String edate = "2016-11-09";
+String edate = "2016-11-20";
 if(psdate != null)
 {
 	sdate = psdate;
@@ -40,12 +41,12 @@ if(pedate != null)
 						<div class="input-daterange input-group" id="datepicker">
 						    <input type="text" class="input-sm form-control" name="sdate" value="<%=sdate%>" />
 						    <span class="input-group-addon">to</span>
-						    <input type="text" class="input-sm form-control" name="edate" value="<%=edate %>" />
+						    <input type="text" class="input-sm form-control" name="edate" value="<%=edate%>" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="keyword">키워드</label>
-						<input type="text" class="form-control" id="keyword" name="keyword" placeholder="키워드 입력" value="<% if(keyword != null) { %><%=keyword%> <% } %>">
+						<input type="text" class="form-control" id="keyword" name="keyword" placeholder="키워드 입력" value="<% if(keyword != null) { %><%=keyword%><%}%>">
 					</div>
 					<button type="submit" class="btn btn-primary btn-block">검색</button>
 				</form>
@@ -82,11 +83,11 @@ if(pedate != null)
 				int recordcnt = (crtpage-1) * page_recordcnt;
 				for(int i=0; i<page_recordcnt; i++) 
 				{
-					recordcnt++;
 					if(totalrecordcnt == recordcnt)
 					{
 						break;
 					}
+					recordcnt++;
 				%>
 					<tr>
 						<td></td>

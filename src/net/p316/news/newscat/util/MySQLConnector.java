@@ -54,59 +54,27 @@ public class MySQLConnector
 	
 	public String make_Sql(String sql, String sdate, String edate, String keyword)
 	{
-		if(keyword==null)
+		if(keyword == null)
 		{
 			if(sdate==null && edate==null)
 			{
-				sql += " WHERE `date` BETWEEN '2016-11-09 00:00:00' AND '2016-11-09 23:59:59'";
+				sql += " WHERE `date` BETWEEN '2016-10-25 00:00:00' AND '2016-11-20 23:59:59'";
 			}
 			else
 			{
-				if(sdate.length()==0 && edate.length()==0)
-				{
-					sql += " WHERE `date` BETWEEN '2016-11-09 00:00:00' AND '2016-11-09 23:59:59'";
-				}
-				else {
-					sql += " WHERE `date` BETWEEN '" +sdate+ " 00:00:00' AND '" + edate + " 23:59:59'";
-				}
+				sql += " WHERE `date` BETWEEN '" +sdate+ " 00:00:00' AND '" + edate + " 23:59:59'";
 			}
 		}
 		else
 		{
-			if(keyword.length()==0)
+			sql += " WHERE `title` LIKE '%" + keyword + "%'";
+			if(sdate==null && edate==null)
 			{
-				if(sdate==null && edate==null)
-				{
-					sql += " WHERE `date` BETWEEN '2016-11-09 00:00:00' AND '2016-11-09 23:59:59'";
-				}
-				else
-				{
-					if(sdate.length()==0 && edate.length()==0)
-					{
-						sql += " WHERE `date` BETWEEN '2016-11-09 00:00:00' AND '2016-11-09 23:59:59'";
-					}
-					else {
-						sql += " WHERE `date` BETWEEN '" +sdate+ " 00:00:00' AND '" + edate + " 23:59:59'";
-					}
-				}
+				sql += " AND `date` BETWEEN '2016-10-25 00:00:00' AND '2016-11-20 23:59:59'";
 			}
 			else
 			{
-				sql += " WHERE `title` LIKE '%" + keyword + "%'";
-				if(sdate==null && edate==null)
-				{
-					sql += " AND `date` BETWEEN '2016-11-09 00:00:00' AND '2016-11-09 23:59:59'";
-				}
-				else
-				{
-					if(sdate.length()==0 && edate.length()==0)
-					{
-						sql += " AND `date` BETWEEN '2016-11-09 00:00:00' AND '2016-11-09 23:59:59'";
-					}
-					else {
-						sql += " AND `date` BETWEEN '" +sdate+ " 00:00:00' AND '" + edate + " 23:59:59'";
-					}
-				}
+				sql += " AND `date` BETWEEN '" +sdate+ " 00:00:00' AND '" + edate + " 23:59:59'";
 			}
 		}
 		return sql;

@@ -67,9 +67,13 @@ public class Title extends HttpServlet
 		if(request.getParameter("keyword") != null)
 		{
 			keyword = request.getParameter("keyword");
+			if(keyword == "")
+			{
+				keyword = null;
+			}
 		}
 		int totalrecordcnt = conn.get_Recordcnt(sdate, edate, keyword);
-		int totalpagecnt = totalrecordcnt / PAGE_RECORDCNT + 1;
+		int totalpagecnt = (totalrecordcnt-1) / PAGE_RECORDCNT + 1;
 		//전체 페이지 갯수
 		data = conn.get_Values(crtpage, sdate, edate, keyword);
 		conn.close();
@@ -81,6 +85,7 @@ public class Title extends HttpServlet
 		request.setAttribute("crtpage", crtpage);
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/JSP/title.jsp");
 		dispatcher.forward(request,response);
+		
 	}
 
 	/**

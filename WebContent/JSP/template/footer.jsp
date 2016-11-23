@@ -8,7 +8,7 @@
 	    $('.input-daterange').datepicker({
 	    	format: "yyyy-mm-dd",
 			startDate: "2016-10-25",
-			endDate: "2016-11-19"
+			endDate: "2016-11-20"
 	    });
 	    
 	    $("#ex8").slider({
