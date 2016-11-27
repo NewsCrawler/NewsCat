@@ -1,6 +1,6 @@
 package net.p316.news.newscat.data;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class NcTitle 
 {
@@ -15,63 +15,63 @@ public class NcTitle
 	{	
 	}
 
-	public void set_idx(int idx) 
+	public void set_Nc_idx(int idx) 
 	{
 		this.idx = idx;
 	}
 	
-	public int get_idx() 
+	public int get_Nc_idx() 
 	{
 		return this.idx;
 	}
 
-	public void set_idx_category(int idx_category) 
+	public void set_Nc_idx_category(int idx_category) 
 	{
 		this.idx_category = idx_category;
 	}
 	
-	public int get_idx_category() 
+	public int get_Nc_idx_category() 
 	{
 		return this.idx_category;
 	}
 
-	public void set_url(String url) 
+	public void set_Nc_url(String url) 
 	{
 		this.url = url;
 	}
 	
-	public String get_url() 
+	public String get_Nc_url() 
 	{
 		return this.url;
 	}
 
 
-	public void set_title(String title) 
+	public void set_Nc_title(String title) 
 	{
 		this.title = title;
 	}
 	
-	public String get_title() 
+	public String get_Nc_title() 
 	{
 		return this.title;
 	}
 	
-	public void set_company(String company) 
+	public void set_Nc_company(String company) 
 	{
 		this.company = company;
 	}
 	
-	public String get_company() 
+	public String get_Nc_company() 
 	{
 		return this.company;
 	}
 	
-	public void set_date(Date date) 
+	public void set_Nc_date(Date date) 
 	{
 		this.date = date;
 	}
 	
-	public Date get_date() 
+	public Date get_Nc_date() 
 	{
 		return this.date;
 	}

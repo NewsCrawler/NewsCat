@@ -75,6 +75,7 @@ if(pedate != null)
 						<th>#</th>
 						<th>기사</th>
 						<th>언론사</th>
+						<th>날짜</th>
 						<th>시간</th>
 					</tr>
 				</thead>
@@ -83,6 +84,8 @@ if(pedate != null)
 				int recordcnt = (crtpage-1) * page_recordcnt;
 				for(int i=0; i<page_recordcnt; i++) 
 				{
+					SimpleDateFormat mdsdf = new SimpleDateFormat("MM/dd");
+					SimpleDateFormat hmsdf = new SimpleDateFormat("HH:mm");
 					if(totalrecordcnt == recordcnt)
 					{
 						break;
@@ -91,16 +94,21 @@ if(pedate != null)
 				%>
 					<tr>
 						<td></td>
-						<td><a href="<%=data.get(i).get_url()%>" target="_blank">
+						<td><a href="<%=data.get(i).get_Nc_url()%>" target="_blank">
 						<%
-						out.println(data.get(i).get_title());
+						out.println(data.get(i).get_Nc_title());
 				   		%>
 						</a></td>
-						<td><%=data.get(i).get_company()%></td>
+						<td><%=data.get(i).get_Nc_company()%></td>
 						<td>
-						<%
-						data.get(i).get_date();
-						 %>
+						<%=
+						mdsdf.format(data.get(i).get_Nc_date())
+						%>
+						</td>
+						<td>
+						<%=
+						hmsdf.format(data.get(i).get_Nc_date())
+						%>
 						</td>
 					</tr>
 				<%

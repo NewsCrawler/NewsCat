@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 import net.p316.news.newscat.data.NcTitle;
 
@@ -60,9 +60,13 @@ public class MySQLConnector
 			{
 				sql += " WHERE `date` BETWEEN '2016-10-25 00:00:00' AND '2016-11-20 23:59:59'";
 			}
+//			else
+//			{
+//				sql += " WHERE `date` BETWEEN '" +sdate+ " 00:00:00' AND '" + edate + " 23:59:59'";
+//			}
 			else
 			{
-				sql += " WHERE `date` BETWEEN '" +sdate+ " 00:00:00' AND '" + edate + " 23:59:59'";
+				sql += " WHERE `date` BETWEEN " +sdate+ " AND " + edate;
 			}
 		}
 		else
@@ -74,7 +78,7 @@ public class MySQLConnector
 			}
 			else
 			{
-				sql += " AND `date` BETWEEN '" +sdate+ " 00:00:00' AND '" + edate + " 23:59:59'";
+				sql += " AND `date` `date` BETWEEN " +sdate+ " AND " + edate;
 			}
 		}
 		return sql;
@@ -148,14 +152,16 @@ public class MySQLConnector
 			while (rs.next()) 
 			{
                 NcTitle temp = new NcTitle();
-                temp.set_idx(rs.getInt("idx"));
-                temp.set_idx_category(rs.getInt("idx_category"));
-                temp.set_url(rs.getString("url"));
-                temp.set_title(rs.getString("title"));
-                temp.set_company(rs.getString("company"));
-                temp.set_date(rs.getDate("date"));
+                temp.set_Nc_idx(rs.getInt("idx"));
+                temp.set_Nc_idx_category(rs.getInt("idx_category"));
+                temp.set_Nc_url(rs.getString("url"));
+                temp.set_Nc_title(rs.getString("title"));
+                temp.set_Nc_company(rs.getString("company"));
+                temp.set_Nc_date(rs.getTimestamp("date"));
                 data.add(temp);
+                System.out.println(temp.get_Nc_date());
 			}
+			
 		} 
 		catch (SQLException ex)
 		{
