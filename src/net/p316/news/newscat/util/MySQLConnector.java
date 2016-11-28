@@ -59,11 +59,11 @@ public class MySQLConnector
 		{
 			if(sdate==null && edate==null)
 			{
-				sql += " WHERE `date` BETWEEN '2016-10-25 00:00:00' AND '2016-11-20 23:59:59'";
+				sql += " WHERE `date` BETWEEN '2016-10-25 00:00:00' AND '2016-11-20 23:59:59' ORDER BY `nc_title_1120`.`date` DESC";
 			}
 			else
 			{
-				sql += " WHERE `date` BETWEEN '" +sdate+ "' AND '" + edate + "'";
+				sql += " WHERE `date` BETWEEN '" +sdate+ " 00:00:00' AND '" + edate + " 23:59:59' ORDER BY `nc_title_1120`.`date` DESC";
 			}
 		}
 		else
@@ -71,11 +71,11 @@ public class MySQLConnector
 			sql += " WHERE `title` LIKE '%" + keyword + "%'";
 			if(sdate==null && edate==null)
 			{
-				sql += " AND `date` BETWEEN '2016-10-25 00:00:00' AND '2016-11-20 23:59:59'";
+				sql += " AND `date` BETWEEN '2016-10-25 00:00:00' AND '2016-11-20 23:59:59' ORDER BY `nc_title_1120`.`date` DESC";
 			}
 			else
 			{
-				sql += " AND `date` BETWEEN '" +sdate+ "' AND '" + edate + "'";
+				sql += " AND `date` BETWEEN '" +sdate+ " 00:00:00' AND '" + edate + " 23:59:59' ORDER BY `nc_title_1120`.`date` DESC";
 			}
 		}
 		return sql;
