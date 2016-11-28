@@ -63,7 +63,7 @@ public class MySQLConnector
 			}
 			else
 			{
-				sql += " WHERE `date` BETWEEN " +sdate+ " AND " + edate;
+				sql += " WHERE `date` BETWEEN '" +sdate+ "' AND '" + edate + "'";
 			}
 		}
 		else
@@ -75,7 +75,7 @@ public class MySQLConnector
 			}
 			else
 			{
-				sql += " AND `date` `date` BETWEEN " +sdate+ " AND " + edate;
+				sql += " AND `date` BETWEEN '" +sdate+ "' AND '" + edate + "'";
 			}
 		}
 		return sql;
