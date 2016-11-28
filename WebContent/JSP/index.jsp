@@ -144,36 +144,29 @@ body {
       <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
       </ol>
       <div class="carousel-inner" role="listbox">
         <div class="item active">
-          <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
+          <!-- 
+          <img class="first-slide" src="" alt="First slide">
+           -->
           <div class="container">
             <div class="carousel-caption">
-              <h1>Example headline.</h1>
-              <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+              <h1>NewsCrawler</h1>
+              <p>뉴스크롤러, <strong>뉴스를 보는 새로운 관점</strong><br>저희의 목표는 당신이 빠르고 재미있게 기사의 흐름을 읽는 것입니다.</p>
+              <p><a class="btn btn-lg btn-primary" href="/Semantic" role="button"><i class="fa fa-newspaper-o" aria-hidden="true"></i> 보러가기</a></p>
             </div>
           </div>
         </div>
         <div class="item">
-          <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
+          <!-- 
+          <img class="second-slide" src="" alt="Second slide">
+           -->
           <div class="container">
             <div class="carousel-caption">
-              <h1>Another example headline.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img class="third-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>One more for good measure.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+              <h1>Crawler + Analytics + Algorithm</h1>
+              <p>뉴스를 수집해 상위 키워드 50개를 선별하고 이를 알고리즘을 통해 의미망으로 만들어 냅니다.<br>GtiHub에서 동작 원리를 확인할 수 있습니다.</p>
+              <p><a class="btn btn-lg btn-primary" href="https://github.com/NewsCrawler/" role="button"><i class="fa fa-github" aria-hidden="true"></i> GitHub</a></p>
             </div>
           </div>
         </div>
@@ -198,22 +191,22 @@ body {
       <!-- Three columns of text below the carousel -->
       <div class="row">
         <div class="col-lg-4">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <img class="img-circle" src="/res/img/item1.png" alt="Generic placeholder image" width="140" height="140">
+          <h2>실시간의 다양한 기사들</h2>
+          <p>매 시간 갱신되는 뉴스 기사들 속에서 빠르게 핵심을 골라냅니다. 수백 개의 기사들 안에서 가장 많이 언급된 핵심단어 50개를 보여줍니다.</p>
+          <p><a class="btn btn-default" href="/Title" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-          <h2>Heading</h2>
-          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <img class="img-circle" src="/res/img/item2.png" alt="Generic placeholder image" width="140" height="140">
+          <h2>단 한번의 클릭!</h2>
+          <p>핵심 단어 50개를 보여주고 가중치에 따라 크기를 부여했습니다. 단어에 마우스를 가져다 대면 관련 단어와 관련 있는 단어들을 알 수 있고 이 단어가 언급된 기사를 볼 수 있습니다.</p>
+          <p><a class="btn btn-default" href="/Semantic" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <img class="img-circle" src="/res/img/item3.png" alt="Generic placeholder image" width="140" height="140">
+          <h2>새로운 재미</h2>
+          <p>기존의 신문기사 형식과 다른 형식의 뉴스 포털 사이트이다. 다채로운 색깔로 이루어진 그래프가 사용자들의 흥미를 불러일으킨다.</p>
+          <p><a class="btn btn-default" href="/Semantic" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
 
@@ -224,11 +217,11 @@ body {
 
       <div class="row featurette">
         <div class="col-md-7">
-          <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          <h2 class="featurette-heading">'최순실'과 '청와대' 키워드에대한 <span class="text-muted">정보들이 궁금하다면? </span></h2>
+          <p class="lead">네이버 뉴스 속보를 중심으로 다양한 언론사들에서 자주 언급된 단어나 문맥상 의미를 파악해 키워드로 추려냅니다. 키워드에 관한 뉴스를 날짜에 맞춰 확인할 수 있습니다.</p>
         </div>
         <div class="col-md-5">
-          <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+          <img class="featurette-image img-responsive center-block" data-src="/res/img/feature2.png" src="/res/img/feature2.png" alt="Generic placeholder image">
         </div>
       </div>
 
@@ -236,11 +229,11 @@ body {
 
       <div class="row featurette">
         <div class="col-md-7 col-md-push-5">
-          <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          <h2 class="featurette-heading">2016년 11월 11일의 <span class="text-muted">의미망 분석 그래프가 보고 싶다면?</span></h2>
+          <p class="lead">원 안의 단어는 최신 기사들 속에서 가장 많이 언급된 50개의 단어를 키워드로 선정한 것이며 각 단어를 선택하면 다른 키워드들 간의 관계를 알 수 있습니다.</p>
         </div>
         <div class="col-md-5 col-md-pull-7">
-          <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+          <img class="featurette-image img-responsive center-block" data-src="/res/img/feature1.png" src="/res/img/feature1.png" alt="Generic placeholder image">
         </div>
       </div>
 

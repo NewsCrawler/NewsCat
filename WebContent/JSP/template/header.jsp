@@ -40,6 +40,8 @@
     <![endif]-->
 
     <link rel="stylesheet" href="/res/css/style.css">
+    
+    <script src="https://use.fontawesome.com/bcd559e468.js"></script>
   </head>
   <body>
     <!-- Fixed navbar -->
