@@ -6,7 +6,10 @@
 
 <div class="container">
 	<div class="col-xs-12 col-sm-10 col-sm-offset-1">
-		<div class="row" style="margin-top:30px; margin-bottom:30px;">
+		<div class="row" style="margin-bottom:30px;">
+			<div class="page-header">
+				<h1>의미망 분석<small>10월 25일부터 특정 기간을 설정합니다.</small></h1>
+			</div>
 			<strong style="margin-right:10px;">D-Day +</strong>
 			<input id="ex8" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="27" data-slider-step="1" data-slider-value="0"/>
 		</div>

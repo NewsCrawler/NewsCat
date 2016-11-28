@@ -12,17 +12,19 @@
 	    });
 	    
 	    $("#ex8").slider({
-	    	tooltip: 'always'
+	    	tooltip: 'always',
+	    	value: [0, 10],
+	    	focus: true
 	    });
 	    $("#ex8").on("slideStop", function(slideEvt){
 	    	console.log(slideEvt.value);
-	    	$.get( "/Graph?dDay=" + slideEvt.value, function( data ) {
+	    	$.get("/Graph?dDay=" + slideEvt.value[1] + "&sDay=" + slideEvt.value[0], function( data ) {
 	    		  
 	    		  console.log(data);
 	    		  
 	    		  $("svg g *").remove();
 	    		  
-	    		  d3.json("/Graph?dDay=" + slideEvt.value, function(error, graph) {
+	    		  d3.json("/Graph?dDay=" + slideEvt.value[1] + "&sDay=" + slideEvt.value[0], function(error, graph) {
 	    			    var linkedByIndex = {};
 	    			    graph.links.forEach(function(d) {
 	    			        linkedByIndex[d.source + "," + d.target] = true;
