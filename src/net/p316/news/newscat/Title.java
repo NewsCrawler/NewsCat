@@ -16,6 +16,7 @@ import net.p316.news.newscat.util.MySQLConnector;
 /**
  * Servlet implementation class Title
  */
+//¡÷¿€
 @WebServlet("/Title")
 public class Title extends HttpServlet 
 {
@@ -85,7 +86,6 @@ public class Title extends HttpServlet
 		request.setAttribute("crtpage", crtpage);
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/JSP/title.jsp");
 		dispatcher.forward(request,response);
-		
 	}
 
 	/**
