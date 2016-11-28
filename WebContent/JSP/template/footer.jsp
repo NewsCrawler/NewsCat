@@ -1,5 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>	
+	<!-- Modal -->
+	<div id="loading" class="modal fade static" role="dialog" style="margin-top: 450px;">
+	  <div class="modal-dialog">
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h4 class="modal-title">Loading</h4>
+	      </div>
+	      <div class="modal-body">
+	        <p>의미망 작성에 필요한 정보를 불러오고 있습니다.<br>잠시만 기다려주세요.</p>
+	        <div class="progress">
+			  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+			    <span class="sr-only">loading...</span>
+			  </div>
+			</div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js" integrity="sha256-zXNrZH6Aqd2T5QyZumro0VuxbhdKhOiQhxtw6YxgjUM=" crossorigin="anonymous"></script>
@@ -12,17 +31,26 @@
 	    });
 	    
 	    $("#ex8").slider({
-	    	tooltip: 'always'
+	    	tooltip: 'always',
+	    	value: [0, 3],
+	    	focus: true
 	    });
 	    $("#ex8").on("slideStop", function(slideEvt){
 	    	console.log(slideEvt.value);
-	    	$.get( "/Graph?dDay=" + slideEvt.value, function( data ) {
+	    	$.get("/Graph?dDay=" + slideEvt.value[1] + "&sDay=" + slideEvt.value[0], function( data ) {
 	    		  
 	    		  console.log(data);
 	    		  
+	    		  $('#loading').modal('show');
+	    		  
 	    		  $("svg g *").remove();
 	    		  
-	    		  d3.json("/Graph?dDay=" + slideEvt.value, function(error, graph) {
+	    		  var tsDate = new Date(Date.parse("2016-10-25") + slideEvt.value[0] * 86400000);
+	    		  var teDate = new Date(Date.parse("2016-10-25") + slideEvt.value[1] * 86400000);
+	    		  $("#sdate").text(tsDate.getFullYear() + "-" + (tsDate.getMonth()+1) + "-" + tsDate.getDate());
+	    		  $("#edate").text(teDate.getFullYear() + "-" + (teDate.getMonth()+1) + "-" + teDate.getDate());
+	    		  
+	    		  d3.json("/Graph?dDay=" + slideEvt.value[1] + "&sDay=" + slideEvt.value[0], function(error, graph) {
 	    			    var linkedByIndex = {};
 	    			    graph.links.forEach(function(d) {
 	    			        linkedByIndex[d.source + "," + d.target] = true;
@@ -63,6 +91,10 @@
 
 	    			    node.on("dblclick",function(d){
 	    			        console.log(d.id);
+	    			        window.open(
+	    			      		  '/Title?sdate=' + $("#sdate").text() + '&edate=' + $("#edate").text() + '&keyword=' + d.id,
+	    			      		  '_blank' // <- This is what makes it open in a new window.
+	    			      		);
 	    			    });
 	    			        
 	    			    node.on("dblclick.zoom", function(d) {
@@ -272,7 +304,9 @@
 	    			                else {exit_highlight();}
 	    			            }
 	    			        }   
-	    			    } 
+	    			    }
+	    			    
+	    			    $('#loading').modal('hide');
 	    			});
     		});
 	    });

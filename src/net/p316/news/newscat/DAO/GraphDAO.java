@@ -26,7 +26,7 @@ public class GraphDAO {
 		ResultSet rs = null;
 		StringBuffer sql = new StringBuffer(
 				"select b.idx_title, b.idx_word, c.word"
-				+ " from nc_title a"
+				+ " from nc_title_1120 a"
 				+ " inner join nc_counter_title_word b"
 				+ " on a.idx = b.idx_title"
 				+ " inner join nc_word_table c"
