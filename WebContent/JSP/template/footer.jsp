@@ -13,7 +13,7 @@
 	    
 	    $("#ex8").slider({
 	    	tooltip: 'always',
-	    	value: [0, 10],
+	    	value: [0, 3],
 	    	focus: true
 	    });
 	    $("#ex8").on("slideStop", function(slideEvt){

@@ -41,11 +41,25 @@ public class Graph extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// check request getParam
-		int dDay = 0;
-		if(request.getParameterMap().containsKey("dDay")) dDay = Integer.parseInt(request.getParameter("dDay"));
+		int sDay = 0;
+		int dDay = 3;
+		if(request.getParameterMap().containsKey("sDay")) dDay = Integer.parseInt(request.getParameter("sDay"));
+		if(request.getParameterMap().containsKey("dDay")) dDay = Integer.parseInt(request.getParameter("dDay")) + 1;
 		
 		Date sdate = Date.valueOf("2016-10-25");
 		Date edate = Date.valueOf("2016-11-13");
+
+		int saddDay = 0;
+		// TimeStamp로 바꿔야함
+		if(sDay < 6){
+			saddDay = 26;
+			saddDay += sDay;
+			sdate = Date.valueOf("2016-10-" + Integer.toString(saddDay));
+		}else{
+			saddDay = 0;
+			saddDay += sDay-5;
+			sdate = Date.valueOf("2016-11-" + Integer.toString(saddDay));
+		}
 		
 		int addDay = 0;
 		// TimeStamp로 바꿔야함
