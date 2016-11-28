@@ -86,12 +86,12 @@ if(pedate != null)
 				int recordcnt = (crtpage-1) * page_recordcnt;
 				for(int i=0; i<page_recordcnt; i++) 
 				{
-					SimpleDateFormat mdsdf = new SimpleDateFormat("MM/dd");
-					SimpleDateFormat hmsdf = new SimpleDateFormat("HH:mm");
-					if(totalrecordcnt == recordcnt)
+					if(totalrecordcnt <= recordcnt)
 					{
 						break;
 					}
+					SimpleDateFormat mdsdf = new SimpleDateFormat("MM/dd");
+					SimpleDateFormat hmsdf = new SimpleDateFormat("HH:mm");
 					recordcnt++;
 				%>
 					<tr>
@@ -164,7 +164,7 @@ if(pedate != null)
 					%>
 		
 					<%
-					if((crtpage-1)/page_pagecnt != totalpagecnt/page_pagecnt)
+					if((crtpage-1)/page_pagecnt != (totalpagecnt-1)/page_pagecnt)
 					{
 					%>
 						<li>

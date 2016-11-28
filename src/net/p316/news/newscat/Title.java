@@ -86,6 +86,7 @@ public class Title extends HttpServlet
 		request.setAttribute("crtpage", crtpage);
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/JSP/title.jsp");
 		dispatcher.forward(request,response);
+		System.out.printf("crtpage = %d, totalpagecnt = %d, totalrecordcnt = %d", crtpage, totalpagecnt, totalrecordcnt);
 	}
 
 	/**

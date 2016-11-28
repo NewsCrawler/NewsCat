@@ -156,7 +156,6 @@ public class MySQLConnector
                 temp.set_Nc_company(rs.getString("company"));
                 temp.set_Nc_date(rs.getTimestamp("date"));
                 data.add(temp);
-                System.out.println(temp.get_Nc_date());
 			}
 			
 		} 
