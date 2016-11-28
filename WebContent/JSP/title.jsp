@@ -68,6 +68,7 @@ if(pedate != null)
 			}
 			%>
 			검색 목록<% if(nowPage != null) { %>의 <%=nowPage%> 페이지<% } %>
+			<small>총 n개의 검색결과</small>
 			</h3>
 		
 			<table class="table table-striped">
