@@ -24,6 +24,11 @@
 	    		  
 	    		  $("svg g *").remove();
 	    		  
+	    		  var tsDate = new Date(Date.parse("2016-10-25") + slideEvt.value[0] * 86400000);
+	    		  var teDate = new Date(Date.parse("2016-10-25") + slideEvt.value[1] * 86400000);
+	    		  $("#sdate").text(tsDate.getFullYear() + "-" + (tsDate.getMonth()+1) + "-" + tsDate.getDate());
+	    		  $("#edate").text(teDate.getFullYear() + "-" + (teDate.getMonth()+1) + "-" + teDate.getDate());
+	    		  
 	    		  d3.json("/Graph?dDay=" + slideEvt.value[1] + "&sDay=" + slideEvt.value[0], function(error, graph) {
 	    			    var linkedByIndex = {};
 	    			    graph.links.forEach(function(d) {

@@ -10,8 +10,14 @@
 			<div class="page-header">
 				<h1>의미망 분석<small>10월 25일부터 특정 기간을 설정합니다.</small></h1>
 			</div>
-			<strong style="margin-right:10px;">D-Day +</strong>
-			<input id="ex8" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="27" data-slider-step="1" data-slider-value="0"/>
+			<div class="well well-sm">
+				<strong style="margin-right:10px;">D-Day +</strong>
+				<input id="ex8" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="27" data-slider-step="1" data-slider-value="0"/>
+				&nbsp;&nbsp;<span id="sdate">2016-10-25</span> - <span id="edate">2016-10-28</span>
+			</div>
+			<div class="alert alert-info" role="alert">
+				<storng>더블클릭</storng>하면 해당 키워드에 대한 뉴스기사들을 볼 수 있습니다.
+			</div>
 		</div>
 		
 		<div class="row">
