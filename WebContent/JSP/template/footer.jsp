@@ -36,12 +36,11 @@
 	    	focus: true
 	    });
 	    $("#ex8").on("slideStop", function(slideEvt){
+	    	$('#loading').modal('show');
 	    	console.log(slideEvt.value);
 	    	$.get("/Graph?dDay=" + slideEvt.value[1] + "&sDay=" + slideEvt.value[0], function( data ) {
 	    		  
 	    		  console.log(data);
-	    		  
-	    		  $('#loading').modal('show');
 	    		  
 	    		  $("svg g *").remove();
 	    		  
