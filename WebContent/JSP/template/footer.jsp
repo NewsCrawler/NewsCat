@@ -91,6 +91,10 @@
 
 	    			    node.on("dblclick",function(d){
 	    			        console.log(d.id);
+	    			        window.open(
+	    			      		  '/Title?sdate=' + $("#sdate").text() + '&edate=' + $("#edate").text() + '&keyword=' + d.id,
+	    			      		  '_blank' // <- This is what makes it open in a new window.
+	    			      		);
 	    			    });
 	    			        
 	    			    node.on("dblclick.zoom", function(d) {
