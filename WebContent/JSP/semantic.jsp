@@ -33,7 +33,7 @@
 	overflow: hidden;
 }
 html body {
-     overflow:hidden;
+     /* overflow:hidden; */
 }
 @media (min-width: 768px) {
 	#graph{
