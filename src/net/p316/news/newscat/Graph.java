@@ -157,16 +157,26 @@ public class Graph extends HttpServlet {
 		int[][] newMatrics = new int[size][size];
 		
 		// Map을 새로 만듬
-		for(int i=1; i<size; i++){
-			if(usedID[i]){
-				if(cntID[i] > cutLine){
-					newMap.add(i);
+		for(int t=1; t<size; t++){
+			int maxValue = 0;
+			int maxIndex = -1;
+			for(int i=1; i<size; i++){
+				int chkExist = newMap.indexOf(i);
+				if(usedID[i] && chkExist < 0){
+					if(cntID[i] > cutLine){
+						if(cntID[i] > maxValue){
+							maxValue = cntID[i];
+							maxIndex = i;
+						}
+					}
 				}
 			}
+			if(maxIndex >= 0){
+				newMap.add(maxIndex);
+			} else {
+				break;
+			}
 		}
-		
-		// cntID가 큰 순으로 노드 순서를 정렬한다.
-		
 		
 		// 각 노드에서 자기와 연결된 작은 노드를 3개 노드를 추가한다.
 		
@@ -233,6 +243,13 @@ public class Graph extends HttpServlet {
 				if(vCntID > 1000) nodeSize += 10;
 				if(vCntID > 3000) nodeSize += 20;
 				if(vCntID > 5000) nodeSize += 20;
+				
+				if(i < newMap.size()/10) nodeSize = 80;
+				else if(i < newMap.size()/3) nodeSize = 60;
+				else if(i < newMap.size()/2) nodeSize = 40;
+				else if(i < newMap.size()/1.5) nodeSize = 30;
+				else nodeSize = 20;
+				
 				nodes.add(new JNode(nodeSize, wordCate[newMap.get(i)], wordID[newMap.get(i)]));
 		}
 		
