@@ -16,6 +16,7 @@ import net.p316.news.newscat.util.MySQLConnector;
 /**
  * Servlet implementation class Title
  */
+//¡÷¿€
 @WebServlet("/Title")
 public class Title extends HttpServlet 
 {

@@ -48,7 +48,8 @@ public class MySQLConnector
 		}
 	}
 	
-	public Connection getConn(){
+	public Connection getConn()
+	{
 		return conn; 
 	}
 	
@@ -60,10 +61,6 @@ public class MySQLConnector
 			{
 				sql += " WHERE `date` BETWEEN '2016-10-25 00:00:00' AND '2016-11-20 23:59:59'";
 			}
-//			else
-//			{
-//				sql += " WHERE `date` BETWEEN '" +sdate+ " 00:00:00' AND '" + edate + " 23:59:59'";
-//			}
 			else
 			{
 				sql += " WHERE `date` BETWEEN " +sdate+ " AND " + edate;
@@ -141,7 +138,7 @@ public class MySQLConnector
 		ArrayList<NcTitle> data = new ArrayList<NcTitle>();
 		Statement stmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM `nc_title`";
+		String sql = "SELECT * FROM `nc_title_1120`";
 		try 
 		{
 			Class.forName("com.mysql.jdbc.Driver");
@@ -186,7 +183,8 @@ public class MySQLConnector
 	        	try 
 	        	{ 
 	        		stmt.close(); 
-	        	} catch(SQLException ex) 
+	        	} 
+	        catch(SQLException ex) 
 	        {
 	        		System.out.println("SQLException: " + ex.getMessage());
 	        }

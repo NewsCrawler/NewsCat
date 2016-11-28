@@ -1,7 +1,7 @@
 package net.p316.news.newscat.data;
 
 import java.util.Date;
-
+//¡÷¿€
 public class NcTitle 
 {
 	private int idx;

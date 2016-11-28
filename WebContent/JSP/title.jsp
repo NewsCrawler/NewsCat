@@ -5,6 +5,7 @@
 <%@ page import = "java.text.SimpleDateFormat" %>
 <%@ page import = "net.p316.news.newscat.data.NcTitle"%>
 <%
+//주작
 ArrayList<NcTitle> data = (ArrayList<NcTitle>) request.getAttribute("data");
 int totalpagecnt = Integer.parseInt(request.getAttribute("totalpagecnt").toString());
 int totalrecordcnt = Integer.parseInt(request.getAttribute("totalrecordcnt").toString());
