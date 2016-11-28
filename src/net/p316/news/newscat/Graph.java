@@ -81,7 +81,7 @@ public class Graph extends HttpServlet {
 		
 		// run Algorithm
 		int size = 400;
-		int cutLine = 10;
+		int cutLine = 2;
 		int[][] matrix = new int[size][size];
 		String[] wordID = new String[size];
 		double[] wordCate = new double[size];
@@ -186,6 +186,7 @@ public class Graph extends HttpServlet {
 		//newMap = new ArrayList<Integer>(newMap.subList(0, 50));
 		
 		// 행렬 그래프 축소
+		int[] connectedCnt = new int[size];
 		for(int i=0; i<newMap.size(); i++){
 			int oi = newMap.get(i);
 			for(int oj=0; oj<size; oj++){
@@ -194,7 +195,7 @@ public class Graph extends HttpServlet {
 					if(j >= 0){
 						// matrix[oi][oj]에서 3번째까지 크거나, 100개 이상 있는 경우
 						boolean flag = false;
-						if(matrix[oi][oj] > 1000) flag = true;
+						if(matrix[oi][oj] > 100) flag = true;
 						if(!flag){
 							// Dynamic, 
 							int maxCnt = 0;
@@ -204,7 +205,10 @@ public class Graph extends HttpServlet {
 							}
 							if(maxCnt < 2) flag = true;
 						}
-						if(flag) newMatrics[i][j] = matrix[oi][oj];
+						if(flag && connectedCnt[j] < 4){
+							newMatrics[i][j] = matrix[oi][oj];
+							connectedCnt[j]++;
+						}
 					}
 				}
 			}
@@ -230,26 +234,36 @@ public class Graph extends HttpServlet {
 		ArrayList<JNode> nodes = new ArrayList<JNode>();
 		for(int i=0; i<newMap.size(); i++){
 			
-				// 노드의 크기를 평탄화 시키려면 x^2를 써야함
-				int nodeSize = 10;
-				int vCntID = cntID[newMap.get(i)];
-				if(vCntID > 5) nodeSize += 10;
-				if(vCntID > 10) nodeSize += 10;
-				if(vCntID > 20) nodeSize += 10;
-				if(vCntID > 50) nodeSize += 10;
-				if(vCntID > 100) nodeSize += 10;
-				if(vCntID > 250) nodeSize += 10;
-				if(vCntID > 500) nodeSize += 10;
-				if(vCntID > 1000) nodeSize += 10;
-				if(vCntID > 3000) nodeSize += 20;
-				if(vCntID > 5000) nodeSize += 20;
-				
-				if(i < newMap.size()/10) nodeSize = 80;
-				else if(i < newMap.size()/3) nodeSize = 60;
-				else if(i < newMap.size()/2) nodeSize = 40;
-				else if(i < newMap.size()/1.5) nodeSize = 30;
-				else nodeSize = 20;
-				
+			// 노드의 크기를 평탄화 시키려면 x^2를 써야함
+			int nodeSize = 10;	
+			/*
+			int vCntID = cntID[newMap.get(i)];
+			if(vCntID > 5) nodeSize += 10;
+			if(vCntID > 10) nodeSize += 10;
+			if(vCntID > 20) nodeSize += 10;
+			if(vCntID > 50) nodeSize += 10;
+			if(vCntID > 100) nodeSize += 10;
+			if(vCntID > 250) nodeSize += 10;
+			if(vCntID > 500) nodeSize += 10;
+			if(vCntID > 1000) nodeSize += 10;
+			if(vCntID > 3000) nodeSize += 20;
+			if(vCntID > 5000) nodeSize += 20;
+			*/
+		
+			if(i < newMap.size()/10) nodeSize = 80;
+			else if(i < newMap.size()/3) nodeSize = 60;
+			else if(i < newMap.size()/2) nodeSize = 40;
+			else if(i < newMap.size()/1.5) nodeSize = 30;
+			else nodeSize = 20;
+			/*
+			boolean chkEdge = false;
+			for(int j=0; j<newMap.size(); j++){
+				if(newMatrics[i][j] > 0){
+					chkEdge = true;
+					break;
+				}
+			}
+			if(chkEdge)*/
 				nodes.add(new JNode(nodeSize, wordCate[newMap.get(i)], wordID[newMap.get(i)]));
 		}
 		
