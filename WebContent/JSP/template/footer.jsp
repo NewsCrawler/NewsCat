@@ -26,7 +26,7 @@
     <script>
 	    $('.input-daterange').datepicker({
 	    	format: "yyyy-mm-dd",
-			startDate: "2016-10-25",
+			startDate: "2016-10-24",
 			endDate: "2016-11-20"
 	    });
 	    

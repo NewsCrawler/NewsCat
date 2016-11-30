@@ -19,7 +19,7 @@ if(request.getParameterMap().containsKey("keyword")) keyword = request.getParame
 if(keyword == "") keyword = null;
 String nowPage = null;
 if(request.getParameterMap().containsKey("page")) nowPage = request.getParameter("page");
-String sdate = "2016-10-25";
+String sdate = "2016-10-24";
 String edate = "2016-11-20";
 if(psdate != null)
 {

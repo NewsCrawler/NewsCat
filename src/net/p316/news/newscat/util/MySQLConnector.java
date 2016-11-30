@@ -59,7 +59,7 @@ public class MySQLConnector
 		{
 			if(sdate==null && edate==null)
 			{
-				sql += " WHERE `date` BETWEEN '2016-10-25 00:00:00' AND '2016-11-20 23:59:59' ORDER BY `nc_title_1120_test2`.`date` DESC";
+				sql += " WHERE `date` BETWEEN '2016-10-24 00:00:00' AND '2016-11-20 23:59:59' ORDER BY `nc_title_1120_test2`.`date` DESC";
 			}
 			else
 			{
@@ -71,7 +71,7 @@ public class MySQLConnector
 			sql += " WHERE `title` LIKE '%" + keyword + "%'";
 			if(sdate==null && edate==null)
 			{
-				sql += " AND `date` BETWEEN '2016-10-25 00:00:00' AND '2016-11-20 23:59:59' ORDER BY `nc_title_1120_test2`.`date` DESC";
+				sql += " AND `date` BETWEEN '2016-10-24 00:00:00' AND '2016-11-20 23:59:59' ORDER BY `nc_title_1120_test2`.`date` DESC";
 			}
 			else
 			{
@@ -86,7 +86,7 @@ public class MySQLConnector
 		int recordcnt = 0;
 		Statement stmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT COUNT(*) FROM `nc_title_1120`";
+		String sql = "SELECT COUNT(*) FROM `nc_title_1120_test2`";
 		try 
 		{
 			Class.forName("com.mysql.jdbc.Driver");
@@ -138,7 +138,7 @@ public class MySQLConnector
 		ArrayList<NcTitle> data = new ArrayList<NcTitle>();
 		Statement stmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM `nc_title_1120`";
+		String sql = "SELECT * FROM `nc_title_1120_test2`";
 		try 
 		{
 			Class.forName("com.mysql.jdbc.Driver");
