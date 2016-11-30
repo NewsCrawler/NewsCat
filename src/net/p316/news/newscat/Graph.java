@@ -203,9 +203,9 @@ public class Graph extends HttpServlet {
 								if(oj == l) continue;
 								if(matrix[oi][oj] < matrix[oi][l]) maxCnt++;
 							}
-							if(maxCnt < 2) flag = true;
+							if(maxCnt < 3) flag = true;
 						}
-						if(flag && connectedCnt[j] < 4){
+						if((flag && connectedCnt[j] < 4) || (matrix[oi][oj] > 500)){
 							newMatrics[i][j] = matrix[oi][oj];
 							connectedCnt[j]++;
 						}
